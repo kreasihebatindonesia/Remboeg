@@ -96,7 +96,7 @@
                 app:tabIndicatorColor="@android:color/white"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@android:color/white"
-                app:tabTextColor="@color/colorAccent" />
+                app:tabTextColor="@color/colorPrimarySmooth" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -157,7 +157,8 @@
             android:id="@+id/mLoader"
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             app:mk_color="@color/colorPrimary"
             app:mk_type="FourPulse" />
 

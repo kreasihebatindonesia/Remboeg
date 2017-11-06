@@ -1,4 +1,4 @@
-package com.kreasihebatindonesia.remboeg;
+package com.kreasihebatindonesia.remboeg.activities;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
+import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.app.BaseApplication;
 import com.kreasihebatindonesia.remboeg.networks.ConnectivityReceiver;
 import com.kreasihebatindonesia.remboeg.pagers.MainViewPagerAdapter;
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
         mViewPager.setAdapter(mViewPagerAdapter);
 
         mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
+
+
     }
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
