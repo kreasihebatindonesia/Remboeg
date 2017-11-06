@@ -40,85 +40,49 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:gravity="bottom|left"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/txtView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawableTop="@drawable/icon_view_12dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp" />
 
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_weight="1"
-                        android:tint="@color/colorNavigation"
-                        card_view:srcCompat="@drawable/ic_eye" />
-
-                    <TextView
-                        android:id="@+id/txtView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorNavigation"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/txtLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawableTop="@drawable/icon_like_12dp"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp" />
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_weight="1"
-                        android:tint="@color/colorNavigation"
-                        card_view:srcCompat="@drawable/ic_thumb_up" />
-
-                    <TextView
-                        android:id="@+id/txtLike"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorNavigation"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/mTicketEvent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="right"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/mTicketEvent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorNavigation"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="GRATIS"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

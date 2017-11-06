@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +66,8 @@ public class HomeFragment extends Fragment implements ILocation{
     EditText txtSearch;
     @BindView(R.id.mLoader)
     MKLoader mLoader;
-
+    @BindView(R.id.lytLocation)
+    LinearLayout lytLocation;
 
     private int DummyFastIndex = 0;
     private HomeViewPagerAdapter adapter;
@@ -179,6 +181,7 @@ public class HomeFragment extends Fragment implements ILocation{
                                 setupViewPager(mViewPager);
                                 mTabLayout.setupWithViewPager(mViewPager);
 
+                                lytLocation.setVisibility(View.VISIBLE);
                                 txtSelectCity.setText(mCurrentLocation.GetNameCity());
                             }
                         });

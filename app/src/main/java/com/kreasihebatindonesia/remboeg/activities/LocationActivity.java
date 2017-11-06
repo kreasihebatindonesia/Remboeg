@@ -79,8 +79,6 @@ public class LocationActivity extends AppCompatActivity {
 
         mListView.addHeaderView(myHeader, null, false);
 
-
-
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

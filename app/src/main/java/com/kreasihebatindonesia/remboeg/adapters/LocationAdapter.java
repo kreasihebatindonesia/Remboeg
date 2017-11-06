@@ -1,6 +1,7 @@
 package com.kreasihebatindonesia.remboeg.adapters;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
     private LocationActivity mActivity;
     private LocationFilter locFilter;
     private LocationModel mCurrentLocation;
+    private LocationModel locModel;
 
     public LocationAdapter(LocationActivity activity, LocationModel currentLocation, ArrayList<LocationModel> arrayLoc) {
         mActivity = activity;
@@ -54,8 +56,7 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         final ViewHolder holder;
-
-        LocationModel locModel = (LocationModel) getItem(position);
+        locModel = (LocationModel) getItem(position);
 
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -63,20 +64,18 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
             holder = new ViewHolder();
 
             holder.mCityName = (TextView) view.findViewById(R.id.mCityName);
-            holder.imgCheckCity = (ImageView) view.findViewById(R.id.imgCheckCity);
-
             view.setTag(holder);
+
         } else {
             holder = (ViewHolder) view.getTag();
         }
 
+
+
         holder.mCityName.setText(locModel.GetNameCity());
         if(mCurrentLocation != null){
-            if(locModel.GetIdCity() == mCurrentLocation.GetIdCity()){
-                holder.imgCheckCity.setVisibility(View.VISIBLE);
-            }else{
-                holder.imgCheckCity.setVisibility(View.INVISIBLE);
-            }
+            int mDrawable = locModel.GetIdCity() == mCurrentLocation.GetIdCity()?R.drawable.icon_check_20dp:null;
+            holder.mCityName.setCompoundDrawablesWithIntrinsicBounds(0, 0, mDrawable, 0);
         }
 
         notifyDataSetChanged();
@@ -126,6 +125,5 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
 
     static class ViewHolder {
         TextView mCityName;
-        ImageView imgCheckCity;
     }
 }
