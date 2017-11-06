@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Remboeg</string>
+
+    <string name="bottom_tab_1">Home</string>
+    <string name="bottom_tab_2">Pinned</string>
+    <string name="bottom_tab_3">Near Me</string>
+    <string name="bottom_tab_4">Profile</string>
+
+    <string name="textLocation">LOKASI</string>
 </resources>
