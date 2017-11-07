@@ -191,9 +191,6 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
                         locations.add(new DummyLocalInfoModel("Appvation Pty. Ltd. 4", "202/147 Pirie St, Adelaide"));
                         */
 
-
-
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -215,11 +212,10 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
         for(int i = 0 ; i < mNearbys.size() ; i++ ) {
             createMarker(mNearbys.get(i).getLatLocation(), mNearbys.get(i).getLngLocation(), mNearbys.get(i).getTitle(), mNearbys.get(i).getAddress());
         }
-        LatLng latlong = new LatLng(gps.getLatitude(),gps.getLongitude());
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(latlong).zoom(15).build();
-        map.addMarker(new MarkerOptions().position(latlong).title("Lokasi"));
-        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
+        LatLng latlong = new LatLng(mNearbys.get(0).getLatLocation(),mNearbys.get(0).getLngLocation());
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(latlong).zoom(15).build();
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
     }
 
