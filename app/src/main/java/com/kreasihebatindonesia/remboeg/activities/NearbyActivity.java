@@ -9,23 +9,19 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kreasihebatindonesia.remboeg.R;
-import com.kreasihebatindonesia.remboeg.adapters.DummyCardAdapter;
+import com.kreasihebatindonesia.remboeg.adapters.NearbyAdapter;
 import com.kreasihebatindonesia.remboeg.globals.Const;
-import com.kreasihebatindonesia.remboeg.models.DummyLocalInfoModel;
-import com.kreasihebatindonesia.remboeg.models.EventModel;
 import com.kreasihebatindonesia.remboeg.models.NearbyModel;
 import com.kreasihebatindonesia.remboeg.services.GPSTracker;
 import com.kreasihebatindonesia.remboeg.utils.Utils;
@@ -59,14 +55,15 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
 
-    private DummyCardAdapter mDummyCardAdapter;
-    private int selectedPosition = 0;
+    private NearbyAdapter mNearbyAdapter;
+    private int selectedPosition = -1;
 
     SupportMapFragment mMapView;
     GoogleMap map;
 
     private GPSTracker gps;
     private List<NearbyModel> mNearbys = new ArrayList<>();
+    private List<Marker> mMarkers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +78,9 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
         mMapView = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mMapView);
         mMapView.getMapAsync(this);
 
-        mDummyCardAdapter = new DummyCardAdapter(this);
+        mNearbyAdapter = new NearbyAdapter(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerView.setAdapter(mDummyCardAdapter);
+        mRecyclerView.setAdapter(mNearbyAdapter);
 
         LinearSnapHelper snapHelper = new LinearSnapHelper(){
             @Override
@@ -131,10 +128,28 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
 
     private void onViewSnapped(int index) {
 
-        NearbyModel dModel = mDummyCardAdapter.getItem(index);
+        final NearbyModel dModel = mNearbyAdapter.getItem(index);
         LatLng latlong = new LatLng(dModel.getLatLocation(),dModel.getLngLocation());
         //CameraPosition cameraPosition = new CameraPosition.Builder().target(latlong).zoom(15).build();
         //map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
+        {
+            public View getInfoWindow(Marker arg0)
+            {
+                View v = getLayoutInflater().inflate(R.layout.marker_map_window, null);
+                TextView tView = (TextView)v.findViewById(R.id.txtTitle);
+                tView.setText(dModel.getTitle());
+                return v;
+            }
+            public View getInfoContents(Marker arg0)
+            {
+                return null;
+            }
+        });
+
+        mMarkers.get(index).showInfoWindow();
+
         CameraUpdate location = CameraUpdateFactory.newLatLngZoom(latlong, 15);
         map.animateCamera(location);
 
@@ -179,23 +194,17 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
                             mNearby.setLocation(Utils.optDouble(resultObject, "lat_loc"), Utils.optDouble(resultObject, "lng_loc"));
                             mNearby.setVenue(Utils.optString(resultObject, "venue"));
                             mNearby.setAddress(Utils.optString(resultObject, "address"));
+                            mNearby.setImage(Utils.optString(resultObject, "image"));
+                            mNearby.setTicket(Utils.optString(resultObject, "ticket"));
 
                             mNearbys.add(mNearby);
                         }
-
-                        /*
-                        List<DummyLocalInfoModel> locations = new ArrayList<>();
-                        locations.add(new DummyLocalInfoModel("Appvation Pty. Ltd. 1", "202/147 Pirie St, Adelaide"));
-                        locations.add(new DummyLocalInfoModel("Appvation Pty. Ltd. 2 ", "202/147 Pirie St, Adelaide"));
-                        locations.add(new DummyLocalInfoModel("Appvation Pty. Ltd. 3", "202/147 Pirie St, Adelaide"));
-                        locations.add(new DummyLocalInfoModel("Appvation Pty. Ltd. 4", "202/147 Pirie St, Adelaide"));
-                        */
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 initializeMarker();
-                                mDummyCardAdapter.setItems(mNearbys);
+                                mNearbyAdapter.setItems(mNearbys);
                             }
                         });
 
@@ -217,25 +226,13 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
         CameraPosition cameraPosition = new CameraPosition.Builder().target(latlong).zoom(15).build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-    }
-
-    protected void createMarker(double lat, double lng, final String title, String snippet) {
-        Marker marker = map.addMarker(new MarkerOptions()
-                .position(new LatLng(lat, lng))
-                .anchor(0.5f, 0.5f)
-                .title(title)
-                .snippet(snippet));
-                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker)));
-
-        marker.showInfoWindow();
-
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
         {
             public View getInfoWindow(Marker arg0)
             {
                 View v = getLayoutInflater().inflate(R.layout.marker_map_window, null);
                 TextView tView = (TextView)v.findViewById(R.id.txtTitle);
-                tView.setText(title);
+                tView.setText(mNearbys.get(0).getTitle());
                 return v;
             }
             public View getInfoContents(Marker arg0)
@@ -243,5 +240,19 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
                 return null;
             }
         });
+
+        mMarkers.get(0).showInfoWindow();
+
+    }
+
+    private void createMarker(double lat, double lng, final String title, String snippet) {
+        Marker marker = map.addMarker(new MarkerOptions()
+                .position(new LatLng(lat, lng))
+                .anchor(0.5f, 0.5f)
+                .title(title)
+                .snippet(snippet));
+                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker)));
+        mMarkers.add(marker);
+
     }
 }

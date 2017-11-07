@@ -13,6 +13,8 @@ public class NearbyModel {
     private double mLngLoc;
     private String mVenue;
     private String mAddress;
+    private String mImage;
+    private String mTicket;
 
     public NearbyModel(){
 
@@ -69,5 +71,19 @@ public class NearbyModel {
     }
     public String getAddress(){
         return mAddress;
+    }
+
+    public String getImage() {
+        return mImage;
+    }
+    public void setImage(String image) {
+        mImage = image;
+    }
+
+    public void setTicket(String ticket){
+        mTicket = ticket;
+    }
+    public String getTicket(){
+        return mTicket;
     }
 }

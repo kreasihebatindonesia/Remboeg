@@ -1,32 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="256dp"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mCardView"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp">
-    <RelativeLayout
+    android:layout_margin="10dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
-        <TextView
-            android:id="@+id/text_title"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="Ini adalah judul"
-            android:text="Appvation Pty. Ltd."/>
-        <TextView
-            android:id="@+id/text_caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_title"
-            style="Ini adalah caption"
-            android:text="202/147 Pirie St, Adelaide"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_account" />
-    </RelativeLayout>
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTiitle"
+                style="Ini adalah judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:textColor="@color/colorBlack_80"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtAddress"
+                style="Ini adalah caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack_80" />
+
+            <TextView
+                android:id="@+id/txtTicket"
+                style="Ini adalah caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/mImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/loading_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </android.support.v7.widget.CardView>

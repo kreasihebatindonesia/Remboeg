@@ -30,7 +30,6 @@
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:id="@+id/lytSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -64,6 +63,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="Near Me"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
