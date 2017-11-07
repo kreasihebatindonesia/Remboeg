@@ -16,20 +16,31 @@
         android:id="@+id/mToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@color/colorTransparent"
         android:gravity="center_vertical|center_horizontal|center"
         android:textAlignment="center"
-        android:theme="@style/AppTheme.ToolbarIcon.Black"
-        app:navigationIcon="?attr/homeAsUpIndicator">
+        android:theme="@style/AppTheme.ToolbarIcon"
+        android:titleTextColor="@color/colorPrimary"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
     </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_gravity="bottom"
-        android:layout_margin="5dp"
         android:background="@drawable/rounded_10dp_white"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"
+        android:visibility="gone">
+
+    </LinearLayout>
 
 </FrameLayout>

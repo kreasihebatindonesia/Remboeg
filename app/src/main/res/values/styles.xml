@@ -13,6 +13,11 @@
         <item name="colorControlNormal">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="AppTheme.ToolbarIcon" parent="AppTheme">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
+    </style>
+
     <style name="AppTheme.NoActionBar.TransparentStatusBar" parent="AppTheme">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowContentOverlay">@null</item>

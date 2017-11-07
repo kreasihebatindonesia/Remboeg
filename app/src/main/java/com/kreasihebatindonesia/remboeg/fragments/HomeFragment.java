@@ -192,6 +192,8 @@ public class HomeFragment extends Fragment implements ILocation{
 
                                 lytLocation.setVisibility(View.VISIBLE);
                                 txtSelectCity.setText(mCurrentLocation.GetNameCity());
+
+                                Const.DUMMY_LOCATION_ID = mCurrentLocation.GetIdCity();
                             }
                         });
 

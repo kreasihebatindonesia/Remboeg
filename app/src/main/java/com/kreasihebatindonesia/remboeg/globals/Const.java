@@ -24,10 +24,14 @@ public class Const {
     public static final String METHOD_JOB_DETAIL_ACTIVE = HOST_ADDRESS + "/api/jobs/active/id";
     public static final String METHOD_JOB_DETAIL_INACTIVE = HOST_ADDRESS + "/api/jobs/inactive/id";
 
+    //NEARBY
+    public static final String METHOD_NEARBY = HOST_ADDRESS + "/api/nearby";
+
     public static final String METHOD_PROMO = HOST_ADDRESS + "/api/promo";
 
     public static final String URL_UPLOADS = HOST_ADDRESS + "/uploads";
 
 
     public static final int DUMMY_USER_ID = 1;
+    public static int DUMMY_LOCATION_ID = 0;
 }
