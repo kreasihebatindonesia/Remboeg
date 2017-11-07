@@ -9,4 +9,9 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#E6E6E6</color>
     <color name="colorNavigation">#F6F6F6</color>
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorBlack_80">#34373C</color>
+    <color name="colorBlack_30">#E7ECF4</color>
+    <color name="colorGrey_50">#DEE7EE</color>
 </resources>

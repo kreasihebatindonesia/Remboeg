@@ -148,7 +148,7 @@ public class HomeFragmentEvent extends Fragment implements ILocation {
                         }
 
 
-                        mEventAdapter = new EventAdapter(getContext(), mEventModelList, true);
+                        mEventAdapter = new EventAdapter(getContext(), mEventModelList);
 
                         runOnUiThread(new Runnable() {
                             @Override

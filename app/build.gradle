@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        signed {
+            keyAlias 'KreasiHebatIndonesia'
+            keyPassword '@Imbangmuah90'
+            storeFile file('E:/ANDROID STUDIO/GIT/Remboeg/signedkey.jks')
+            storePassword '@Imbangmuah90'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
@@ -15,12 +23,16 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signed
+        }
+        debug {
+            signingConfig signingConfigs.signed
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -28,7 +40,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:25.+'
     compile 'com.android.support:design:25.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-
     compile 'com.aurelhubert:ahbottomnavigation:2.1.0'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'

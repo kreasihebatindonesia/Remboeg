@@ -64,6 +64,8 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
             holder = new ViewHolder();
 
             holder.mCityName = (TextView) view.findViewById(R.id.mCityName);
+            holder.mIcoRight = (TextView) view.findViewById(R.id.mIcoRight);
+
             view.setTag(holder);
 
         } else {
@@ -74,8 +76,8 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
 
         holder.mCityName.setText(locModel.GetNameCity());
         if(mCurrentLocation != null){
-            int mDrawable = locModel.GetIdCity() == mCurrentLocation.GetIdCity()?R.drawable.icon_check_20dp:null;
-            holder.mCityName.setCompoundDrawablesWithIntrinsicBounds(0, 0, mDrawable, 0);
+            int mHide = locModel.GetIdCity() == mCurrentLocation.GetIdCity()?View.VISIBLE:View.GONE;
+            holder.mIcoRight.setVisibility(mHide);
         }
 
         notifyDataSetChanged();
@@ -125,5 +127,6 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
 
     static class ViewHolder {
         TextView mCityName;
+        TextView mIcoRight;
     }
 }

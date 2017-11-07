@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.kreasihebatindonesia.remboeg.R;
+import com.kreasihebatindonesia.remboeg.activities.DetailEventActivity;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.models.EventModel;
 import com.kreasihebatindonesia.remboeg.utils.FormatNumber;
@@ -24,7 +25,6 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
     private Context mContext;
     private List<EventModel> mEventModelList;
-    private boolean mStatusActive;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitleEvent;
@@ -44,10 +44,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         }
     }
 
-    public EventAdapter(Context mContext, List<EventModel> mEventModelList, boolean statusActive) {
+    public EventAdapter(Context mContext, List<EventModel> mEventModelList) {
         this.mContext = mContext;
         this.mEventModelList = mEventModelList;
-        mStatusActive = statusActive;
     }
 
     @Override
@@ -71,10 +70,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         holder.mImageEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent i = new Intent(mContext, DetailEventActivity.class);
-                //i.putExtra("status_event", mStatusActive);
-                //i.putExtra("id_event", mEvent.getIdEvent());
-                //mContext.startActivity(i);
+                Intent i = new Intent(mContext, DetailEventActivity.class);
+                i.putExtra("id_event", mEvent.getIdEvent());
+                mContext.startActivity(i);
             }
         });
     }

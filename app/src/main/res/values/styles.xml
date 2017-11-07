@@ -28,5 +28,10 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:typeface">serif</item>
     </style>
+    <style name="TransparentTextCollapseSizeFont">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:typeface">serif</item>
+    </style>
 
 </resources>

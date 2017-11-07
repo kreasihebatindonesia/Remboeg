@@ -26,10 +26,21 @@
                 android:id="@+id/mCityName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/icon_check_20dp"
-                android:drawableTint="@color/colorPrimary"
+                android:layout_weight="1"
                 android:gravity="left|center_vertical"
                 android:text="YOGYAKARTA"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/mIcoRight"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/icon_check_20dp"
+                android:drawableTint="@color/colorPrimary"
+                android:gravity="left|center_vertical"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />

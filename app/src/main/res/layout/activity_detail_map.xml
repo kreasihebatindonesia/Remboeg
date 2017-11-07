@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|bottom"
+        android:layout_marginBottom="175dp"
+        android:gravity="top|bottom"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/mMapView"
+            android:name="com.kreasihebatindonesia.remboeg.activities.DetailMapActivity"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnDirection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_primary_color"
+            android:text="Bawa Saya Ke Lokasi" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:paddingBottom="30dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/ic_map_marker" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/txtVenue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/mToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:theme="@style/AppTheme.ToolbarIcon.Black"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+</android.support.design.widget.CoordinatorLayout>

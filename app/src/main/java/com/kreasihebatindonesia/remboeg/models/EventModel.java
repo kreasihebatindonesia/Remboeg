@@ -74,6 +74,10 @@ public class EventModel {
         descEvent = desc;
     }
     public Spanned getDescEvent(){
+
+        if(descEvent == null)
+            return null;
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Html.fromHtml(descEvent, Html.FROM_HTML_MODE_LEGACY);
         } else {

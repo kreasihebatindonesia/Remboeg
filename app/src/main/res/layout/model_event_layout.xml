@@ -50,11 +50,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:drawableTint="@color/colorPrimary"
+                    android:drawableTint="@color/colorBlack_80"
                     android:drawableTop="@drawable/icon_view_12dp"
                     android:text="0"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBlack_80"
                     android:textSize="12sp" />
 
                 <TextView
@@ -63,11 +63,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:drawableTint="@color/colorPrimary"
+                    android:drawableTint="@color/colorBlack_80"
                     android:drawableTop="@drawable/icon_like_12dp"
                     android:text="0"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBlack_80"
                     android:textSize="12sp" />
 
                 <TextView
@@ -81,7 +81,7 @@
                     android:gravity="right|center_vertical"
                     android:text="GRATIS"
                     android:textAllCaps="true"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
             </LinearLayout>
