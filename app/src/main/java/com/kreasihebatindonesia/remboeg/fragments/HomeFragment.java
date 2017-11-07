@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.LocationActivity;
+import com.kreasihebatindonesia.remboeg.activities.SearchActivity;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.interfaces.ILocation;
 import com.kreasihebatindonesia.remboeg.models.LocationModel;
@@ -103,6 +104,14 @@ public class HomeFragment extends Fragment implements ILocation{
                 Gson gson = new Gson();
                 iLocation.putExtra("mCurrentLocation", gson.toJson(mCurrentLocation));
                 startActivityForResult(iLocation, CODE_RESULT_LOCATION);
+            }
+        });
+
+        txtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iSearch = new Intent(getActivity(), SearchActivity.class);
+                startActivity(iSearch);
             }
         });
 

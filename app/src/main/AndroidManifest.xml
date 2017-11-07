@@ -45,6 +45,16 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
+        <activity
+            android:name=".activities.SearchActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity
+            android:name=".activities.NearbyActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
 
         <receiver
             android:name=".networks.ConnectivityReceiver"
