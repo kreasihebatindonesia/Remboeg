@@ -94,7 +94,7 @@ public class DetailMapActivity extends AppCompatActivity implements OnMapReadyCa
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setMapToolbarEnabled(false);
 
-        gps = new GPSTracker(getBaseContext());
+        gps = new GPSTracker(this);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
