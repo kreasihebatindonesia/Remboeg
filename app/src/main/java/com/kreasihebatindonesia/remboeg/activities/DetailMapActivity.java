@@ -139,7 +139,6 @@ public class DetailMapActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
-
         marker.showInfoWindow();
     }
 
