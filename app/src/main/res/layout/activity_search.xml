@@ -25,11 +25,13 @@
             android:hint="Event, workshop dan promo"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textColorHint="#C4CDE0" />
+            android:textColorHint="#C4CDE0"
+            android:imeOptions="actionDone"/>
 
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/mExpandSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -118,6 +120,34 @@
                 android:drawSelectorOnTop="false"
                 android:minHeight="250dp" />
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mResultSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:id="@+id/mLoader"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            app:mk_color="@color/colorPrimary"
+            app:mk_type="FourPulse" />
+
+        <ListView
+            android:id="@+id/mListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:dividerHeight="1dp"
+            android:drawSelectorOnTop="false"
+            android:minHeight="250dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 
