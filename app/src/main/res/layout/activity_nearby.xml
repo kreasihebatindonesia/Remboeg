@@ -20,6 +20,7 @@
         android:textAlignment="center"
         android:theme="@style/AppTheme.ToolbarIcon"
         android:titleTextColor="@color/colorPrimary"
+        android:visibility="gone"
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 

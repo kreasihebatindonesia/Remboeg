@@ -1,6 +1,18 @@
 package com.kreasihebatindonesia.remboeg.activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -15,6 +27,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -82,7 +96,7 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setAdapter(mNearbyAdapter);
 
-        LinearSnapHelper snapHelper = new LinearSnapHelper(){
+        LinearSnapHelper snapHelper = new LinearSnapHelper() {
             @Override
             public View findSnapView(RecyclerView.LayoutManager layoutManager) {
                 View view = super.findSnapView(layoutManager);
@@ -120,7 +134,13 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.getUiSettings().setCompassEnabled(false);
-        map.getUiSettings().setMyLocationButtonEnabled(false);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            map.setMyLocationEnabled(true);
+        }else{
+            map.setMyLocationEnabled(true);
+        }
+
+        map.getUiSettings().setMyLocationButtonEnabled(true);
         map.getUiSettings().setMapToolbarEnabled(false);
 
         getNearby(Const.DUMMY_LOCATION_ID, gps.getLocation().getLatitude(),gps.getLocation().getLongitude(), 15 );
@@ -246,12 +266,13 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
     }
 
     private void createMarker(double lat, double lng, final String title, String snippet) {
+
         Marker marker = map.addMarker(new MarkerOptions()
                 .position(new LatLng(lat, lng))
                 .anchor(0.5f, 0.5f)
                 .title(title)
                 .snippet(snippet));
-                //.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker)));
+
         mMarkers.add(marker);
 
     }
