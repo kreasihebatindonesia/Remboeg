@@ -9,10 +9,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -20,6 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -35,8 +38,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.adapters.NearbyAdapter;
+import com.kreasihebatindonesia.remboeg.fragments.HomeFragmentEvent;
+import com.kreasihebatindonesia.remboeg.fragments.HomeFragmentJob;
+import com.kreasihebatindonesia.remboeg.fragments.NearbyFragmentEvent;
 import com.kreasihebatindonesia.remboeg.globals.Const;
+import com.kreasihebatindonesia.remboeg.interfaces.INearby;
 import com.kreasihebatindonesia.remboeg.models.NearbyModel;
+import com.kreasihebatindonesia.remboeg.pagers.HomeViewPagerAdapter;
+import com.kreasihebatindonesia.remboeg.pagers.NearbyViewPagerAdapter;
 import com.kreasihebatindonesia.remboeg.services.GPSTracker;
 import com.kreasihebatindonesia.remboeg.utils.Utils;
 import com.kreasihebatindonesia.remboeg.utils.VerticalOffsetDecoration;
@@ -63,21 +72,15 @@ import okhttp3.Response;
  * Created by IT DCM on 07/11/2017.
  */
 
-public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class NearbyActivity extends AppCompatActivity implements INearby {
     @BindView(R.id.mToolbar)
     Toolbar mToolbar;
-    @BindView(R.id.mRecyclerView)
-    RecyclerView mRecyclerView;
+    @BindView(R.id.mTabLayout)
+    TabLayout mTabLayout;
+    @BindView(R.id.mViewPager)
+    ViewPager mViewPager;
 
-    private NearbyAdapter mNearbyAdapter;
-    private int selectedPosition = -1;
-
-    SupportMapFragment mMapView;
-    GoogleMap map;
-
-    private GPSTracker gps;
-    private List<NearbyModel> mNearbys = new ArrayList<>();
-    private List<Marker> mMarkers = new ArrayList<>();
+    private NearbyViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,40 +88,6 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_nearby);
 
         ButterKnife.bind(this);
-
-        gps = new GPSTracker(this);
-        gps.getLocation();
-
-        mMapView = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mMapView);
-        mMapView.getMapAsync(this);
-
-        mNearbyAdapter = new NearbyAdapter(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerView.setAdapter(mNearbyAdapter);
-
-        LinearSnapHelper snapHelper = new LinearSnapHelper() {
-            @Override
-            public View findSnapView(RecyclerView.LayoutManager layoutManager) {
-                View view = super.findSnapView(layoutManager);
-
-                if (view != null) {
-                    final int newPosition = layoutManager.getPosition(view);
-
-                    if (newPosition != selectedPosition && mRecyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE) {
-                        onViewSnapped(newPosition);
-                        selectedPosition = newPosition;
-                    }
-
-                }
-
-                return view;
-            }
-        };
-
-        snapHelper.attachToRecyclerView(mRecyclerView);
-        mRecyclerView.setOnFlingListener(snapHelper);
-        mRecyclerView.addItemDecoration(new VerticalOffsetDecoration(this));
-
 
         mToolbar.setTitle("Near Me");
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -128,152 +97,30 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
             }
         });
 
+        setupViewPager(mViewPager);
+        mTabLayout.setupWithViewPager(mViewPager);
+
+        /*
+        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = mTabLayout.getTabAt(i);
+            tab.setCustomView(adapter.getTabView(i));
+        }
+           */
+
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        adapter = new NearbyViewPagerAdapter(getSupportFragmentManager(), this);
+        adapter.addFrag(NearbyFragmentEvent.newInstance(0), "Event & Workshop");
+        adapter.addFrag(NearbyFragmentEvent.newInstance(0), "Job Fairs");
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
+
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-        map.getUiSettings().setCompassEnabled(false);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            map.setMyLocationEnabled(true);
-        }else{
-            map.setMyLocationEnabled(true);
-        }
-
-        map.getUiSettings().setMyLocationButtonEnabled(true);
-        map.getUiSettings().setMapToolbarEnabled(false);
-
-        getNearby(Const.DUMMY_LOCATION_ID, gps.getLocation().getLatitude(),gps.getLocation().getLongitude(), 25 );
-    }
-
-    private void onViewSnapped(int index) {
-
-        final NearbyModel dModel = mNearbyAdapter.getItem(index);
-        LatLng latlong = new LatLng(dModel.getLatLocation(),dModel.getLngLocation());
-        //CameraPosition cameraPosition = new CameraPosition.Builder().target(latlong).zoom(15).build();
-        //map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-        map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
-        {
-            public View getInfoWindow(Marker arg0)
-            {
-                View v = getLayoutInflater().inflate(R.layout.marker_map_window, null);
-                TextView tView = (TextView)v.findViewById(R.id.txtTitle);
-                tView.setText(dModel.getTitle());
-                return v;
-            }
-            public View getInfoContents(Marker arg0)
-            {
-                return null;
-            }
-        });
-
-        mMarkers.get(index).showInfoWindow();
-
-        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(latlong, 15);
-        map.animateCamera(location);
-
-    }
-
-    public void getNearby(int id_location, double lat_loc, double lng_loc, double radius){
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("id_location", id_location + "")
-                .addFormDataPart("lat_location", lat_loc + "")
-                .addFormDataPart("lng_location", lng_loc + "")
-                .addFormDataPart("radius", radius + "")
-                .build();
-
-        Request request = new Request.Builder()
-                .url(Const.METHOD_NEARBY)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient client = new OkHttpClient();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try{
-                    JSONObject jsonObj = new JSONObject(response.body().string());
-                    final boolean mError = jsonObj.getInt("status") == 0 ? true : false;
-                    if (!mError) {
-                        JSONArray jsonArray = new JSONArray(jsonObj.getString("result"));
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject resultObject = jsonArray.getJSONObject(i);
-                            final NearbyModel mNearby = new NearbyModel();
-                            mNearby.setId(Utils.optInt(resultObject, "id"));
-                            mNearby.setIdType(Utils.optInt(resultObject, "id_type"));
-                            mNearby.setIdLocation(Utils.optInt(resultObject, "id_location"));
-                            mNearby.setTitle(Utils.optString(resultObject, "title"));
-                            mNearby.setLocation(Utils.optDouble(resultObject, "lat_loc"), Utils.optDouble(resultObject, "lng_loc"));
-                            mNearby.setVenue(Utils.optString(resultObject, "venue"));
-                            mNearby.setAddress(Utils.optString(resultObject, "address"));
-                            mNearby.setImage(Utils.optString(resultObject, "image"));
-                            mNearby.setTicket(Utils.optString(resultObject, "ticket"));
-
-                            mNearbys.add(mNearby);
-                        }
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                initializeMarker();
-                                mNearbyAdapter.setItems(mNearbys);
-                            }
-                        });
-
-                    }
-                } catch (JSONException e) {
-                    Log.d("ERROR", e.toString());
-                }
-            }
-        });
-
-    }
-
-    void initializeMarker(){
-        for(int i = 0 ; i < mNearbys.size() ; i++ ) {
-            createMarker(mNearbys.get(i).getLatLocation(), mNearbys.get(i).getLngLocation(), mNearbys.get(i).getTitle(), mNearbys.get(i).getAddress());
-        }
-
-        LatLng latlong = new LatLng(mNearbys.get(0).getLatLocation(),mNearbys.get(0).getLngLocation());
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(latlong).zoom(15).build();
-        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-        map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
-        {
-            public View getInfoWindow(Marker arg0)
-            {
-                View v = getLayoutInflater().inflate(R.layout.marker_map_window, null);
-                TextView tView = (TextView)v.findViewById(R.id.txtTitle);
-                tView.setText(mNearbys.get(0).getTitle());
-                return v;
-            }
-            public View getInfoContents(Marker arg0)
-            {
-                return null;
-            }
-        });
-
-        mMarkers.get(0).showInfoWindow();
-
-    }
-
-    private void createMarker(double lat, double lng, final String title, String snippet) {
-
-        Marker marker = map.addMarker(new MarkerOptions()
-                .position(new LatLng(lat, lng))
-                .anchor(0.5f, 0.5f)
-                .title(title)
-                .snippet(snippet));
-
-        mMarkers.add(marker);
-
+    public void onCount(int count) {
+        adapter.setCount(count);
+        //adapter.notifyDataSetChanged();
     }
 }

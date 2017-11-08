@@ -25,7 +25,7 @@ public class Const {
     public static final String METHOD_JOB_DETAIL_INACTIVE = HOST_ADDRESS + "/api/jobs/inactive/id";
 
     //NEARBY
-    public static final String METHOD_NEARBY = HOST_ADDRESS + "/api/nearby";
+    public static final String METHOD_NEARBY_EVENT = HOST_ADDRESS + "/api/nearby/events";
 
     public static final String METHOD_PROMO = HOST_ADDRESS + "/api/promo";
 

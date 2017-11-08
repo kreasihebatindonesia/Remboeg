@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
-    <fragment
-        android:id="@+id/mMapView"
-        android:name="com.kreasihebatindonesia.remboeg.activities.NearbyActivity"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?android:attr/actionBarSize"></fragment>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/mToolbar"
@@ -26,11 +18,25 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/mRecyclerView"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/mTabLayout"
+        style="@style/MyCustomTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="top"
+        android:background="@color/colorWhite"
+        android:theme="@style/MyCustomTabLayout"
+        app:tabIndicatorHeight="@dimen/cardview_default_elevation"
+        app:tabMode="scrollable"
+        app:tabTextColor="@color/colorBlack_80" />
 
-</FrameLayout>
+    <android.support.v4.view.ViewPager
+
+        android:id="@+id/mViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
