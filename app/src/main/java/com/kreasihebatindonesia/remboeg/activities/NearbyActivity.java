@@ -143,7 +143,7 @@ public class NearbyActivity extends AppCompatActivity implements OnMapReadyCallb
         map.getUiSettings().setMyLocationButtonEnabled(true);
         map.getUiSettings().setMapToolbarEnabled(false);
 
-        getNearby(Const.DUMMY_LOCATION_ID, gps.getLocation().getLatitude(),gps.getLocation().getLongitude(), 15 );
+        getNearby(Const.DUMMY_LOCATION_ID, gps.getLocation().getLatitude(),gps.getLocation().getLongitude(), 25 );
     }
 
     private void onViewSnapped(int index) {
