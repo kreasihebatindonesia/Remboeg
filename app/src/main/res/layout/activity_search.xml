@@ -84,7 +84,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="right"
                     android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/quantum_ic_play_arrow_white_24" />
+                    app:srcCompat="@drawable/ic_chevron_right" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
