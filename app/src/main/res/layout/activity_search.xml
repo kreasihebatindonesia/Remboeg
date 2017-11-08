@@ -74,7 +74,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:text="Near Me"
+                    android:text="Near Me (25 Km)"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
