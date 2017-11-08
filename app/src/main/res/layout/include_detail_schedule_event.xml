@@ -6,22 +6,27 @@
     android:layout_marginTop="5dp"
     android:background="@drawable/border_top_with_background_white"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="5dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:text="JADWAL"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:drawableRight="@drawable/ic_chevron_down"
+        android:drawableTint="@color/colorBlack_30"/>
 
     <LinearLayout
         android:id="@+id/mExpandSchedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:visibility="visible">
 

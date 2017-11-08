@@ -81,12 +81,19 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
     @BindView(R.id.txtTicket)
     TextView txtTicket;
 
+    @BindView(R.id.txtContactInfo)
+    TextView txtContactInfo;
+    @BindView(R.id.txtTicketInfo)
+    TextView txtTicketInfo;
+
     @BindView(R.id.mContentEmail)
     LinearLayout mContentEmail;
     @BindView(R.id.mContentWebsite)
     LinearLayout mContentWebsite;
     @BindView(R.id.mContentPhone)
     LinearLayout mContentPhone;
+    @BindView(R.id.mTicket)
+    LinearLayout mTicket;
 
     @BindView(R.id.btnPin)
     Button btnPin;
@@ -233,11 +240,20 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
                                 mContentWebsite.setVisibility(mEvent.getWebsiteEvent() == null? View.GONE: View.VISIBLE);
                                 mContentPhone.setVisibility(mEvent.getContactEvent() == null? View.GONE: View.VISIBLE);
 
+                                if(mEvent.getEmailEvent() == null && mEvent.getWebsiteEvent() == null && mEvent.getContactEvent() == null){
+                                    txtContactInfo.setVisibility(View.VISIBLE);
+                                }
+
                                 txtEmail.setText(mEvent.getEmailEvent());
                                 txtWebsite.setText(mEvent.getWebsiteEvent());
                                 txtPhone.setText(mEvent.getContactEvent());
 
                                 txtTicket.setText(mEvent.getTicketEvent());
+                                mTicket.setVisibility(mEvent.getTicketEvent() == null? View.GONE: View.VISIBLE);
+                                if(mEvent.getTicketEvent() == null){
+                                    txtTicketInfo.setVisibility(View.VISIBLE);
+                                }
+
                                 if (mEvent.getLikeEvent()) {
                                     btnLike.setBackgroundResource(R.drawable.button_rounded_50dp_primary_color);
                                     btnLike.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorWhite));

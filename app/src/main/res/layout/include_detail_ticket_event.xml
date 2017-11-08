@@ -6,11 +6,17 @@
     android:layout_marginTop="5dp"
     android:background="@drawable/border_top_with_background_white"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="6dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_chevron_down"
+        android:drawableTint="@color/colorBlack_30"
+        android:gravity="center_vertical"
         android:text="TIKET"
         android:textColor="@android:color/black"
         android:textSize="16sp"
@@ -21,10 +27,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/txtTicketInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Informasi tidak tersedia."
+            android:textColor="@color/colorBlack_80"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
         <LinearLayout
+            android:id="@+id/mTicket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -32,8 +47,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/border_bottom"
             android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="25dp"
@@ -46,10 +60,9 @@
                 android:id="@+id/txtTicket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
+                android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:gravity="left"
                 android:text="GRATIS"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"

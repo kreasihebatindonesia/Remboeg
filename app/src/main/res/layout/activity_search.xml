@@ -76,7 +76,8 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:text="Near Me (25 Km)"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -136,13 +137,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:background="@drawable/border_top_with_background_white"
                 android:paddingBottom="5dp"
-                android:paddingRight="10dp"
+                android:paddingRight="20dp"
                 android:paddingTop="5dp"
-                android:text="Hapus Riwayat"
+                android:text="HAPUS RIWAYAT"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
