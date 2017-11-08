@@ -36,49 +36,57 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/mCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorWhite"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp">
+            app:cardBackgroundColor="@color/colorTransparent"
+            app:cardElevation="0dp"
+            android:clickable="true">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:tint="@color/colorPrimary"
-                app:srcCompat="@drawable/ic_map_marker" />
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorWhite"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp">
 
-            <TextView
-                android:id="@+id/txtNearby"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="Near Me"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_map_marker" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:tint="@color/colorPrimary"
-                app:srcCompat="@drawable/quantum_ic_play_arrow_white_24" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txtNearby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="Near Me"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/quantum_ic_play_arrow_white_24" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -54,8 +55,6 @@ import okhttp3.Response;
 public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.mToolbar)
     Toolbar mToolbar;
-    @BindView(R.id.txtNearby)
-    TextView txtNearby;
     @BindView(R.id.txtSearch)
     TextView txtSearch;
     @BindView(R.id.txtClearHistory)
@@ -72,6 +71,10 @@ public class SearchActivity extends AppCompatActivity {
     LinearLayout mExpandSearch;
     @BindView(R.id.mResultSearch)
     LinearLayout mResultSearch;
+
+    @BindView(R.id.mCardView)
+    CardView mCardView;
+
 
     private SearchAdapter mAdapter;
     private SqliteDatabaseHandler db;
@@ -134,7 +137,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        txtNearby.setOnClickListener(new View.OnClickListener() {
+        mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent iNearby = new Intent(getBaseContext(), NearbyActivity.class);
