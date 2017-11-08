@@ -2,6 +2,7 @@ package com.kreasihebatindonesia.remboeg.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,7 +22,9 @@ import android.widget.TextView;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.adapters.SearchAdapter;
 import com.kreasihebatindonesia.remboeg.globals.Const;
+import com.kreasihebatindonesia.remboeg.models.DbHistoryModel;
 import com.kreasihebatindonesia.remboeg.models.SearchModel;
+import com.kreasihebatindonesia.remboeg.utils.SqliteDatabaseHandler;
 import com.kreasihebatindonesia.remboeg.utils.Utils;
 import com.tuyenmonkey.mkloader.MKLoader;
 
@@ -28,7 +33,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,9 +58,13 @@ public class SearchActivity extends AppCompatActivity {
     TextView txtNearby;
     @BindView(R.id.txtSearch)
     TextView txtSearch;
+    @BindView(R.id.txtClearHistory)
+    TextView txtClearHistory;
 
     @BindView(R.id.mListView)
     ListView mListView;
+    @BindView(R.id.mListviewHistory)
+    ListView mListviewHistory;
     @BindView(R.id.mLoader)
     MKLoader mLoader;
 
@@ -63,6 +74,7 @@ public class SearchActivity extends AppCompatActivity {
     LinearLayout mResultSearch;
 
     private SearchAdapter mAdapter;
+    private SqliteDatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +89,8 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
             }
         });
+        db = new SqliteDatabaseHandler(getApplicationContext());
+
 
         TextWatcher filterTextWatcher = new TextWatcher() {
 
@@ -90,8 +104,8 @@ public class SearchActivity extends AppCompatActivity {
                     mExpandSearch.setVisibility(View.VISIBLE);
                 }else{
                     //getSearch(s.toString());
-                    mResultSearch.setVisibility(View.VISIBLE);
-                    mExpandSearch.setVisibility(View.GONE);
+                    //mResultSearch.setVisibility(View.VISIBLE);
+                    //mExpandSearch.setVisibility(View.GONE);
                 }
             }
 
@@ -108,6 +122,13 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId==EditorInfo.IME_ACTION_DONE){
                     getSearch(txtSearch.getText().toString());
+
+                    if(txtSearch.getText().toString().length() > 0){
+                        DbHistoryModel history = new DbHistoryModel();
+                        history.setTitle(txtSearch.getText().toString());
+                        db.createHistorySearch(history);
+                    }
+
                 }
                 return false;
             }
@@ -128,16 +149,66 @@ public class SearchActivity extends AppCompatActivity {
                 Intent i = new Intent(SearchActivity.this, DetailEventActivity.class);
                 i.putExtra("id_event", entry.getId());
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
+        mListviewHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String entry = (String) parent.getAdapter().getItem(position);
+                txtSearch.setText(entry);
+                getSearch(entry);
+            }
+        });
+
+        txtClearHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearHistory();
+            }
+        });
+
+        getHistorySearch();
 
         mResultSearch.setVisibility(View.GONE);
         mExpandSearch.setVisibility(View.VISIBLE);
+
+        db.closeDB();
+    }
+
+    void getHistorySearch(){
+        List<DbHistoryModel> dbHistory = db.getAllHistorySearch();
+        ArrayList<String> values = new ArrayList<>();
+        for (DbHistoryModel history : dbHistory) {
+            values.add(history.getTitle());
+        }
+
+        if(values.size() > 0)
+            mListviewHistory.setVisibility(View.VISIBLE);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                text.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
+        mListviewHistory.setAdapter(adapter);
+    }
+
+    void clearHistory(){
+        db.clearHistory();
+        mListviewHistory.setVisibility(View.VISIBLE);
+        getHistorySearch();
     }
 
     void getSearch(String search){
+        mResultSearch.setVisibility(View.VISIBLE);
+        mExpandSearch.setVisibility(View.GONE);
+
         mLoader.setVisibility(View.VISIBLE);
         mListView.setVisibility(View.GONE);
 

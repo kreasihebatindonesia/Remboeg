@@ -39,6 +39,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:background="@color/colorWhite"
             android:clickable="true"
@@ -81,7 +82,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
             android:orientation="vertical">
 
             <LinearLayout
@@ -113,12 +115,30 @@
             </LinearLayout>
 
             <ListView
+                android:id="@+id/mListviewHistory"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:dividerHeight="1dp"
                 android:drawSelectorOnTop="false"
-                android:minHeight="250dp" />
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtClearHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/border_top_with_background_white"
+                android:paddingBottom="5dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:text="Hapus Riwayat"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
     </LinearLayout>
