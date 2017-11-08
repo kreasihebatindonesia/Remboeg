@@ -275,6 +275,14 @@ public class SearchActivity extends AppCompatActivity {
                             }
                         });
 
+                    }else{
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mResultSearch.setVisibility(View.GONE);
+                                mExpandSearch.setVisibility(View.VISIBLE);
+                            }
+                        });
                     }
 
                 } catch (JSONException e) {
