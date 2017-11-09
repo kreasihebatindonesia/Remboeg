@@ -20,15 +20,19 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/mTabLayout"
-        style="@style/MyCustomTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@color/colorWhite"
-        android:theme="@style/MyCustomTabLayout"
-        app:tabIndicatorHeight="@dimen/cardview_default_elevation"
+        app:tabBackground="@color/colorWhite"
+        app:tabGravity="center"
+        app:tabPadding="5dp"
+        app:tabIndicatorColor="@color/colorPrimary"
         app:tabMode="scrollable"
-        app:tabTextColor="@color/colorBlack_80" />
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabTextColor="@color/colorPrimarySmooth" >
+
+    </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
 

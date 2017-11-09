@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/txtTabTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="5dp"
         android:text="TextView"
-        android:textColor="@color/colorBlack_80"
+        android:textAllCaps="true"
+        android:textColor="@color/colorBlack_30"
         android:textSize="16sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtTabCount"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/rounded_50dp_black_30_percent"
+        android:gravity="center_vertical"
+        android:padding="2dp"
+        android:text="10"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite" />
 
     <ImageView
         android:id="@+id/imgTab"
@@ -21,5 +36,6 @@
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:tint="@color/colorPrimary"
-        app:srcCompat="@drawable/cast_ic_expanded_controller_stop" />
+        android:visibility="gone" />
+
 </LinearLayout>

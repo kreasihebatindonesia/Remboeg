@@ -5,7 +5,7 @@ android {
         signed {
             keyAlias 'KreasiHebatIndonesia'
             keyPassword '@Imbangmuah90'
-            storeFile file('E:/PROJECT/PER PROJECT/APLIKASI EVENT/ANDROID/Remboeg/signedkey.jks')
+            storeFile file('E:/ANDROID STUDIO/GIT/Remboeg/signedkey.jks')
             storePassword '@Imbangmuah90'
         }
     }

@@ -58,13 +58,14 @@ public class NearbyViewPagerAdapter extends FragmentPagerAdapter {
         mFragmentCountList.add(count);
         mFragmentCountList.add(count);
         mFragmentCountList.add(count);
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         //return mFragmentTitleList.get(position);
 
+        /*
         int hasilAkhir;
         //Drawable image = mContext.getResources().getDrawable(imageResId[position]);
         //Drawable wrapped = DrawableCompat.wrap(image);
@@ -80,14 +81,13 @@ public class NearbyViewPagerAdapter extends FragmentPagerAdapter {
         //ImageSpan imageSpan = new ImageSpan(wrapped, ImageSpan.ALIGN_BOTTOM);
 
         //sb.setSpan("[4]", 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return sb;
+        //return sb;
 
-
-        //return null;
+           */
+        return null;
     }
 
     public View getTabView(int position) {
-        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
         View v = LayoutInflater.from(mContext).inflate(R.layout.custom_tab, null);
         TextView tv = (TextView) v.findViewById(R.id.txtTabTitle);
         tv.setText(mFragmentTitleList.get(position));
@@ -95,5 +95,6 @@ public class NearbyViewPagerAdapter extends FragmentPagerAdapter {
         img.setImageResource(imageResId[position]);
         return v;
     }
+
 
 }
