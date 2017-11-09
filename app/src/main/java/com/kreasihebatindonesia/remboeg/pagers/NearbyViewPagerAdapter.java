@@ -1,17 +1,11 @@
 package com.kreasihebatindonesia.remboeg.pagers;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kreasihebatindonesia.remboeg.R;
@@ -61,7 +55,7 @@ public class NearbyViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     public View getTabView(int position) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.custom_tab, null);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.custom_tab_nearby, null);
         TextView tv = (TextView) v.findViewById(R.id.txtTabTitle);
         tv.setText(mFragmentTitleList.get(position));
         return v;
