@@ -94,9 +94,9 @@
                 android:layout_gravity="bottom"
                 android:background="@color/colorPrimary"
                 app:layout_anchor="@id/mAppBarLayout"
-                app:tabIndicatorColor="@android:color/white"
+                app:tabIndicatorColor="@color/colorWhite"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@android:color/white"
+                app:tabSelectedTextColor="@color/colorWhite"
                 app:tabTextColor="@color/colorPrimarySmooth" />
 
         </android.support.design.widget.CollapsingToolbarLayout>

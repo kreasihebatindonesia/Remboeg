@@ -7,6 +7,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -128,7 +129,7 @@ public class HomeFragment extends Fragment implements ILocation{
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        adapter = new HomeViewPagerAdapter(getChildFragmentManager());
+        adapter = new HomeViewPagerAdapter(getChildFragmentManager(), getContext());
         adapter.addFrag(HomeFragmentEvent.newInstance(0, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_1));
         adapter.addFrag(HomeFragmentJob.newInstance(0, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_2));
         viewPager.setAdapter(adapter);
@@ -189,6 +190,40 @@ public class HomeFragment extends Fragment implements ILocation{
 
                                 setupViewPager(mViewPager);
                                 mTabLayout.setupWithViewPager(mViewPager);
+
+                                for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+                                    TabLayout.Tab tab = mTabLayout.getTabAt(i);
+                                    tab.setCustomView(adapter.getTabView(i));
+                                }
+
+                                mTabLayout.setScrollPosition(0,0f,true);
+
+                                mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+                                mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                                    @Override
+                                    public void onTabSelected(TabLayout.Tab tab) {
+                                        int tabIconColor = ContextCompat.getColor(getContext(), R.color.colorWhite);
+                                        TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                                        t.setTextColor(tabIconColor);
+                                    }
+
+                                    @Override
+                                    public void onTabUnselected(TabLayout.Tab tab) {
+                                        int tabIconColor = ContextCompat.getColor(getContext(), R.color.colorPrimarySmooth);
+                                        TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                                        t.setTextColor(tabIconColor);
+                                    }
+
+                                    @Override
+                                    public void onTabReselected(TabLayout.Tab tab) {
+                                        int tabIconColor = ContextCompat.getColor(getContext(), R.color.colorWhite);
+                                        TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                                        t.setTextColor(tabIconColor);
+                                    }
+                                });
+
+
+                                mTabLayout.getTabAt(0).select();
 
                                 lytLocation.setVisibility(View.VISIBLE);
                                 txtSelectCity.setText(mCurrentLocation.GetNameCity());
