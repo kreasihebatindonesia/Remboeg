@@ -34,7 +34,6 @@ public class PinnedFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        mToolbar.setTitle("Pinned");
 
         return view;
     }
