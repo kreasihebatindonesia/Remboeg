@@ -86,6 +86,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <include
+            layout="@layout/include_detail_call_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

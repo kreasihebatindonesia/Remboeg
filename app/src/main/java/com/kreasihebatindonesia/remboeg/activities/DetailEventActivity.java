@@ -1,8 +1,15 @@
 package com.kreasihebatindonesia.remboeg.activities;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -99,8 +106,8 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
     Button btnPin;
     @BindView(R.id.btnLike)
     Button btnLike;
-    //@BindView(R.id.btnCall)
-    //Button btnCall;
+    @BindView(R.id.btnCall)
+    Button btnCall;
     @BindView(R.id.btnShare)
     Button btnShare;
 
@@ -240,6 +247,15 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
                                 mContentWebsite.setVisibility(mEvent.getWebsiteEvent() == null? View.GONE: View.VISIBLE);
                                 mContentPhone.setVisibility(mEvent.getContactEvent() == null? View.GONE: View.VISIBLE);
 
+                                if(mEvent.getEmailEvent() != null){
+                                    mListCall.add("Email");
+                                }
+                                if(mEvent.getContactEvent() != null){
+                                    mListCall.add("Telepon");
+                                    mListCall.add("SMS");
+                                }
+
+
                                 if(mEvent.getEmailEvent() == null && mEvent.getWebsiteEvent() == null && mEvent.getContactEvent() == null){
                                     txtContactInfo.setVisibility(View.VISIBLE);
                                 }
@@ -261,6 +277,30 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
                                 }
 
 
+                                btnShare.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent sendIntent = new Intent();
+                                        sendIntent.setAction(Intent.ACTION_SEND);
+                                        sendIntent.putExtra(Intent.EXTRA_TEXT, Const.HOST_ADDRESS + "/" + mEvent.getTicketEvent() + "/" + mEvent.getIdEvent());
+                                        sendIntent.setType("text/plain");
+                                        startActivity(sendIntent);
+                                    }
+                                });
+
+                                btnCall.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if (mListCall.size() > 0)
+                                            showCallDialog();
+                                        else
+                                            Snackbar.make(btnCall, "Tidak ada informasi.", Snackbar.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+                                setViewCountEvent(mEvent.getIdEvent());
+
 
 
                             }
@@ -271,6 +311,31 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
                     Log.d("ERROR", e.toString());
                 }
 
+
+            }
+        });
+    }
+
+    void setViewCountEvent(int id_event) {
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("id_event", id_event + "")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(Const.METHOD_EVENT_SET_VIEW)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
 
             }
         });
@@ -297,5 +362,63 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
             }
         });
 
+    }
+
+    void showCallDialog() {
+        new AlertDialog.Builder(this, R.style.AlertDialog)
+                .setItems(mListCall.toArray(new String[0]),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialoginterface, int i) {
+                                switch (mListCall.get(i)) {
+                                    case "Email":
+                                        sendEmail();
+                                        break;
+                                    case "Telepon":
+                                        callNumber();
+                                        break;
+                                    case "Sms":
+                                        sendSMSMessage();
+                                        break;
+                                }
+                            }
+                        })
+                .show();
+    }
+
+    private void sendSMSMessage() {
+        try {
+            Uri uri = Uri.parse("smsto:" + txtPhone.getText());
+            Intent smsIntent = new Intent(Intent.ACTION_SENDTO, uri);
+            smsIntent.putExtra("sms_body", txtTitle.getText());
+            startActivity(smsIntent);
+        } catch (Exception e) {
+            Toast.makeText(this, "SMS gagal, mohon coba kembali!", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+    private void callNumber() {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + txtPhone.getText()));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermission();
+            return;
+        }
+        startActivity(callIntent);
+    }
+
+    private void requestPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+            Toast.makeText(getBaseContext(), "Aktifkan hak akses", Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+        }
+    }
+
+    private void sendEmail(){
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + txtEmail.getText()));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, txtTitle.getText());
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+        startActivity(Intent.createChooser(emailIntent, "Pilih judul"));
     }
 }

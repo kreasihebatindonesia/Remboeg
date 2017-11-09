@@ -56,4 +56,9 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <!-- Theme AlertDialog -->
+    <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/colorWhite</item>
+    </style>
+
 </resources>

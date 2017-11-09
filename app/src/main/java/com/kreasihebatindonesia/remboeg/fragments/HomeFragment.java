@@ -131,7 +131,9 @@ public class HomeFragment extends Fragment implements ILocation{
     private void setupViewPager(ViewPager viewPager) {
         adapter = new HomeViewPagerAdapter(getChildFragmentManager(), getContext());
         adapter.addFrag(HomeFragmentEvent.newInstance(0, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_1));
-        adapter.addFrag(HomeFragmentJob.newInstance(0, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_2));
+        adapter.addFrag(HomeFragmentJob.newInstance(1, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_2));
+        adapter.addFrag(HomeFragmentJob.newInstance(2, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_3));
+        adapter.addFrag(HomeFragmentJob.newInstance(3, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_4));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
 
@@ -223,12 +225,16 @@ public class HomeFragment extends Fragment implements ILocation{
                                 });
 
 
+
                                 mTabLayout.getTabAt(0).select();
 
                                 lytLocation.setVisibility(View.VISIBLE);
                                 txtSelectCity.setText(mCurrentLocation.GetNameCity());
 
+
                                 Const.DUMMY_LOCATION_ID = mCurrentLocation.GetIdCity();
+
+
                             }
                         });
 
