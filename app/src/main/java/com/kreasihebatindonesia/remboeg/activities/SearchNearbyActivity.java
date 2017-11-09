@@ -97,6 +97,8 @@ public class SearchNearbyActivity extends AppCompatActivity implements INearby {
         adapter = new NearbyViewPagerAdapter(getSupportFragmentManager(), this);
         adapter.addFrag(NearbyFragmentEvent.newInstance(0), getString(R.string.header_tab_1));
         adapter.addFrag(NearbyFragmentEvent.newInstance(1), getString(R.string.header_tab_2));
+        adapter.addFrag(NearbyFragmentEvent.newInstance(2), getString(R.string.header_tab_3));
+        adapter.addFrag(NearbyFragmentEvent.newInstance(3), getString(R.string.header_tab_4));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
     }
