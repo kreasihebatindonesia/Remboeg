@@ -5,6 +5,6 @@ package com.kreasihebatindonesia.remboeg.interfaces;
  */
 
 public interface INearby {
-    void onCount(int count);
+    void onCount(int count, int position);
 }
 

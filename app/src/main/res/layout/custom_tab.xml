@@ -25,17 +25,8 @@
         android:background="@drawable/rounded_50dp_black_30_percent"
         android:gravity="center_vertical"
         android:padding="2dp"
-        android:text="10"
+        android:text="0"
         android:textAlignment="center"
         android:textColor="@color/colorWhite" />
-
-    <ImageView
-        android:id="@+id/imgTab"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:tint="@color/colorPrimary"
-        android:visibility="gone" />
 
 </LinearLayout>

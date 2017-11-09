@@ -198,7 +198,7 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
                     JSONObject jsonObj = new JSONObject(response.body().string());
                     final boolean mError = jsonObj.getInt("status") == 0 ? true : false;
                     if (!mError) {
-                        JSONArray jsonArray = new JSONArray(jsonObj.getString("result"));
+                        final JSONArray jsonArray = new JSONArray(jsonObj.getString("result"));
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject resultObject = jsonArray.getJSONObject(i);
@@ -222,7 +222,7 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
                                 initializeMarker();
                                 mNearbyAdapter.setItems(mNearbys);
                                 INearby mNearby = (NearbyActivity) getActivity();
-                                mNearby.onCount(10);
+                                mNearby.onCount(jsonArray.length(), getArguments().getInt("index"));
 
                             }
                         });
