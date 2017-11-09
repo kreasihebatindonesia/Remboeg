@@ -6,5 +6,9 @@
     <string name="bottom_tab_3">Near Me</string>
     <string name="bottom_tab_4">Profile</string>
 
+    <string name="header_tab_1">Event &amp; Workshop</string>
+    <string name="header_tab_2">Jobs Fair</string>
+
+
     <string name="textLocation">LOKASI</string>
 </resources>

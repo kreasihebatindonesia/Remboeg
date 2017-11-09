@@ -129,8 +129,8 @@ public class HomeFragment extends Fragment implements ILocation{
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new HomeViewPagerAdapter(getChildFragmentManager());
-        adapter.addFrag(HomeFragmentEvent.newInstance(0, mCurrentLocation.GetIdCity()), "Event & Workshop");
-        adapter.addFrag(HomeFragmentJob.newInstance(0, mCurrentLocation.GetIdCity()), "Job Fairs");
+        adapter.addFrag(HomeFragmentEvent.newInstance(0, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_1));
+        adapter.addFrag(HomeFragmentJob.newInstance(0, mCurrentLocation.GetIdCity()), getString(R.string.header_tab_2));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
 

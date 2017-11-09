@@ -95,8 +95,8 @@ public class NearbyActivity extends AppCompatActivity implements INearby {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new NearbyViewPagerAdapter(getSupportFragmentManager(), this);
-        adapter.addFrag(NearbyFragmentEvent.newInstance(0), "Event & Workshop");
-        adapter.addFrag(NearbyFragmentEvent.newInstance(1), "Job Fairs");
+        adapter.addFrag(NearbyFragmentEvent.newInstance(0), getString(R.string.header_tab_1));
+        adapter.addFrag(NearbyFragmentEvent.newInstance(1), getString(R.string.header_tab_2));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
     }
