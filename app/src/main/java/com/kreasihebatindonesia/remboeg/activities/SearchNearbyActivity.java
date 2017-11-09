@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by IT DCM on 07/11/2017.
  */
 
-public class NearbyActivity extends AppCompatActivity implements INearby {
+public class SearchNearbyActivity extends AppCompatActivity implements INearby {
     @BindView(R.id.mToolbar)
     Toolbar mToolbar;
     @BindView(R.id.mTabLayout)

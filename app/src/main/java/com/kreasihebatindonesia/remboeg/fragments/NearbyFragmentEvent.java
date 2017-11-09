@@ -25,7 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kreasihebatindonesia.remboeg.R;
-import com.kreasihebatindonesia.remboeg.activities.NearbyActivity;
+import com.kreasihebatindonesia.remboeg.activities.SearchNearbyActivity;
 import com.kreasihebatindonesia.remboeg.adapters.NearbyAdapter;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.interfaces.INearby;
@@ -221,7 +221,7 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
                             public void run() {
                                 initializeMarker();
                                 mNearbyAdapter.setItems(mNearbys);
-                                INearby mNearby = (NearbyActivity) getActivity();
+                                INearby mNearby = (SearchNearbyActivity) getActivity();
                                 mNearby.onCount(jsonArray.length(), getArguments().getInt("index"));
 
                             }

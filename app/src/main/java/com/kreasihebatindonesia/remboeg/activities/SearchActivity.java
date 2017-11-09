@@ -1,10 +1,8 @@
 package com.kreasihebatindonesia.remboeg.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -34,7 +32,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +137,7 @@ public class SearchActivity extends AppCompatActivity {
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iNearby = new Intent(getBaseContext(), NearbyActivity.class);
+                Intent iNearby = new Intent(getBaseContext(), SearchNearbyActivity.class);
                 startActivity(iNearby);
             }
         });
