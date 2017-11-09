@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.kreasihebatindonesia.remboeg.fragments.HomeFragment;
+import com.kreasihebatindonesia.remboeg.fragments.PinnedFragment;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
         fragments.clear();
         fragments.add(HomeFragment.newInstance(0));
+        fragments.add(PinnedFragment.newInstance(1));
     }
 
     @Override
