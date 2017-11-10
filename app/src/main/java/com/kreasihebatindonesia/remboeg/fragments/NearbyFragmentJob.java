@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.SearchNearbyActivity;
 import com.kreasihebatindonesia.remboeg.adapters.NearbyEventAdapter;
+import com.kreasihebatindonesia.remboeg.adapters.NearbyJobAdapter;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.interfaces.ISearch;
 import com.kreasihebatindonesia.remboeg.models.NearbyModel;
@@ -55,15 +56,15 @@ import okhttp3.Response;
 import static com.google.android.gms.internal.zzagz.runOnUiThread;
 
 /**
- * Created by InfinityLogic on 11/8/2017.
+ * Created by InfinityLogic on 11/10/2017.
  */
 
-public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback {
+public class NearbyFragmentJob extends Fragment implements OnMapReadyCallback {
 
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
 
-    private NearbyEventAdapter mNearbyEventAdapter;
+    private NearbyJobAdapter mNearbyJobAdapter;
     private int selectedPosition = -1;
 
     SupportMapFragment mMapView;
@@ -73,13 +74,14 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
     private List<NearbyModel> mNearbys = new ArrayList<>();
     private List<Marker> mMarkers = new ArrayList<>();
 
-    public static NearbyFragmentEvent newInstance(int index) {
-        NearbyFragmentEvent fragment = new NearbyFragmentEvent();
+    public static NearbyFragmentJob newInstance(int index) {
+        NearbyFragmentJob fragment = new NearbyFragmentJob();
         Bundle b = new Bundle();
         b.putInt("index", index);
         fragment.setArguments(b);
         return fragment;
     }
+
 
     @Nullable
     @Override
@@ -101,9 +103,9 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
         mMapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mMapView);
         mMapView.getMapAsync(this);
 
-        mNearbyEventAdapter = new NearbyEventAdapter(getContext());
+        mNearbyJobAdapter = new NearbyJobAdapter(getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerView.setAdapter(mNearbyEventAdapter);
+        mRecyclerView.setAdapter(mNearbyJobAdapter);
 
         LinearSnapHelper snapHelper = new LinearSnapHelper() {
             @Override
@@ -147,7 +149,7 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
 
     private void onViewSnapped(int index) {
 
-        final NearbyModel dModel = mNearbyEventAdapter.getItem(index);
+        final NearbyModel dModel = mNearbyJobAdapter.getItem(index);
         LatLng latlong = new LatLng(dModel.getLatLocation(),dModel.getLngLocation());
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
         {
@@ -181,7 +183,7 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
                 .build();
 
         Request request = new Request.Builder()
-                .url(Const.METHOD_NEARBY_EVENT)
+                .url(Const.METHOD_NEARBY_JOB)
                 .post(requestBody)
                 .build();
 
@@ -204,14 +206,12 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
                             JSONObject resultObject = jsonArray.getJSONObject(i);
                             final NearbyModel mNearby = new NearbyModel();
                             mNearby.setId(Utils.optInt(resultObject, "id"));
-                            mNearby.setIdType(Utils.optInt(resultObject, "id_type"));
                             mNearby.setIdLocation(Utils.optInt(resultObject, "id_location"));
                             mNearby.setTitle(Utils.optString(resultObject, "title"));
                             mNearby.setLocation(Utils.optDouble(resultObject, "lat_loc"), Utils.optDouble(resultObject, "lng_loc"));
-                            mNearby.setVenue(Utils.optString(resultObject, "venue"));
                             mNearby.setAddress(Utils.optString(resultObject, "address"));
                             mNearby.setImage(Utils.optString(resultObject, "image"));
-                            mNearby.setTicket(Utils.optString(resultObject, "ticket"));
+                            mNearby.setSalary(Utils.optString(resultObject, "salary"));
 
                             mNearbys.add(mNearby);
                         }
@@ -220,7 +220,7 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
                             @Override
                             public void run() {
                                 initializeMarker();
-                                mNearbyEventAdapter.setItems(mNearbys);
+                                mNearbyJobAdapter.setItems(mNearbys);
                                 ISearch mNearby = (SearchNearbyActivity) getActivity();
                                 mNearby.onCount(jsonArray.length(), getArguments().getInt("index"));
 

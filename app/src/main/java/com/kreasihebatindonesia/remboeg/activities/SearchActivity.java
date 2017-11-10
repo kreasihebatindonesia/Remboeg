@@ -23,36 +23,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kreasihebatindonesia.remboeg.R;
-import com.kreasihebatindonesia.remboeg.adapters.SearchAdapter;
-import com.kreasihebatindonesia.remboeg.fragments.NearbyFragmentEvent;
+import com.kreasihebatindonesia.remboeg.adapters.SearchEventAdapter;
 import com.kreasihebatindonesia.remboeg.fragments.SearchFragmentEvent;
-import com.kreasihebatindonesia.remboeg.globals.Const;
+import com.kreasihebatindonesia.remboeg.fragments.SearchFragmentJob;
 import com.kreasihebatindonesia.remboeg.interfaces.ISearch;
 import com.kreasihebatindonesia.remboeg.models.DbHistoryModel;
-import com.kreasihebatindonesia.remboeg.models.SearchModel;
-import com.kreasihebatindonesia.remboeg.pagers.NearbyViewPagerAdapter;
 import com.kreasihebatindonesia.remboeg.pagers.SearchViewPagerAdapter;
 import com.kreasihebatindonesia.remboeg.utils.SqliteDatabaseHandler;
-import com.kreasihebatindonesia.remboeg.utils.Utils;
-import com.tuyenmonkey.mkloader.MKLoader;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Created by IT DCM on 07/11/2017.
@@ -87,7 +70,7 @@ public class SearchActivity extends AppCompatActivity implements ISearch {
     CardView mCardView;
 
 
-    private SearchAdapter mAdapter;
+    private SearchEventAdapter mAdapter;
     private SqliteDatabaseHandler db;
     private SearchViewPagerAdapter adapter;
     @Override
@@ -221,7 +204,7 @@ public class SearchActivity extends AppCompatActivity implements ISearch {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new SearchViewPagerAdapter(getSupportFragmentManager(), this);
         adapter.addFrag(SearchFragmentEvent.newInstance(0), getString(R.string.header_tab_1));
-        adapter.addFrag(SearchFragmentEvent.newInstance(1), getString(R.string.header_tab_2));
+        adapter.addFrag(SearchFragmentJob.newInstance(1), getString(R.string.header_tab_2));
         adapter.addFrag(SearchFragmentEvent.newInstance(2), getString(R.string.header_tab_3));
         adapter.addFrag(SearchFragmentEvent.newInstance(3), getString(R.string.header_tab_4));
         viewPager.setAdapter(adapter);
@@ -281,6 +264,7 @@ public class SearchActivity extends AppCompatActivity implements ISearch {
         mExpandSearch.setVisibility(View.GONE);
 
         ((SearchFragmentEvent)adapter.getItem(0)).getSearch(txtSearch.getText().toString());
+        ((SearchFragmentJob)adapter.getItem(1)).getSearch(txtSearch.getText().toString());
     }
 
     @Override

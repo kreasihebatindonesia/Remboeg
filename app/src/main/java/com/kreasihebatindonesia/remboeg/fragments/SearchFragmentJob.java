@@ -11,9 +11,11 @@ import android.widget.ListView;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.SearchActivity;
 import com.kreasihebatindonesia.remboeg.adapters.SearchEventAdapter;
+import com.kreasihebatindonesia.remboeg.adapters.SearchJobAdapter;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.interfaces.ISearch;
 import com.kreasihebatindonesia.remboeg.models.SearchEventModel;
+import com.kreasihebatindonesia.remboeg.models.SearchJobModel;
 import com.kreasihebatindonesia.remboeg.utils.Utils;
 import com.tuyenmonkey.mkloader.MKLoader;
 
@@ -40,16 +42,16 @@ import static com.google.android.gms.internal.zzagz.runOnUiThread;
  * Created by InfinityLogic on 11/10/2017.
  */
 
-public class SearchFragmentEvent extends Fragment {
+public class SearchFragmentJob extends Fragment {
     @BindView(R.id.mLoader)
     MKLoader mLoader;
     @BindView(R.id.mListView)
     ListView mListView;
 
-    private SearchEventAdapter mAdapter;
+    private SearchJobAdapter mAdapter;
 
-    public static SearchFragmentEvent newInstance(int index) {
-        SearchFragmentEvent fragment = new SearchFragmentEvent();
+    public static SearchFragmentJob newInstance(int index) {
+        SearchFragmentJob fragment = new SearchFragmentJob();
         Bundle b = new Bundle();
         b.putInt("index", index);
         fragment.setArguments(b);
@@ -59,7 +61,7 @@ public class SearchFragmentEvent extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search_event, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_job, container, false);
 
         ButterKnife.bind(this, view);
 
@@ -67,14 +69,14 @@ public class SearchFragmentEvent extends Fragment {
     }
 
     public void getSearch(String search){
-        final ArrayList<SearchEventModel> mSearchEventModelList = new ArrayList<>();
+        final ArrayList<SearchJobModel> mSearchJobModelList = new ArrayList<>();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("search", search + "")
                 .build();
 
         Request request = new Request.Builder()
-                .url(Const.METHOD_SEARCH_EVENT)
+                .url(Const.METHOD_SEARCH_JOB)
                 .post(requestBody)
                 .build();
 
@@ -88,7 +90,7 @@ public class SearchFragmentEvent extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try{
-                    mSearchEventModelList.clear();
+                    mSearchJobModelList.clear();
 
 
                     JSONObject jsonObj = new JSONObject(response.body().string());
@@ -97,15 +99,14 @@ public class SearchFragmentEvent extends Fragment {
                         final JSONArray jsonArray = new JSONArray(jsonObj.getString("result"));
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject resultObject = jsonArray.getJSONObject(i);
-                            SearchEventModel sModel = new SearchEventModel();
+                            SearchJobModel sModel = new SearchJobModel();
                             sModel.setId(Utils.optInt(resultObject, "id"));
-                            sModel.setIdType(Utils.optInt(resultObject, "id_type"));
                             sModel.setTitle(Utils.optString(resultObject, "title"));
                             sModel.setImage(Utils.optString(resultObject, "image"));
-                            sModel.setTicket(Utils.optString(resultObject, "ticket"));
+                            sModel.setSalary(Utils.optString(resultObject, "salary"));
                             sModel.setAddress(Utils.optString(resultObject, "address"));
 
-                            mSearchEventModelList.add(sModel);
+                            mSearchJobModelList.add(sModel);
                         }
 
                         runOnUiThread(new Runnable() {
@@ -114,7 +115,7 @@ public class SearchFragmentEvent extends Fragment {
                                 mLoader.setVisibility(View.GONE);
                                 mListView.setVisibility(View.VISIBLE);
 
-                                mAdapter = new SearchEventAdapter(getActivity(), mSearchEventModelList);
+                                mAdapter = new SearchJobAdapter(getActivity(), mSearchJobModelList);
                                 mListView.setAdapter(mAdapter);
 
 

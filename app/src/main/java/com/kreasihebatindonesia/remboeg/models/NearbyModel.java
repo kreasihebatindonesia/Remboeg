@@ -15,6 +15,7 @@ public class NearbyModel {
     private String mAddress;
     private String mImage;
     private String mTicket;
+    private String mSalary;
 
     public NearbyModel(){
 
@@ -85,5 +86,12 @@ public class NearbyModel {
     }
     public String getTicket(){
         return mTicket;
+    }
+
+    public void setSalary(String salary){
+        mSalary = salary;
+    }
+    public String getSalary(){
+        return mSalary;
     }
 }

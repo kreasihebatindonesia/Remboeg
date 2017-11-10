@@ -67,7 +67,7 @@ public class HomeFragmentEvent extends Fragment implements ILocation {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_event_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_event, container, false);
 
         ButterKnife.bind(this, view);
 

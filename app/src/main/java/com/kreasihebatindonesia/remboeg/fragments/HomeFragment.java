@@ -150,6 +150,9 @@ public class HomeFragment extends Fragment implements ILocation{
 
                 ILocation iLocEvent = (HomeFragmentEvent) adapter.getItem(0);
                 iLocEvent.getDataByLocationID(mCurrentLocation.GetIdCity());
+
+                ILocation iLocJob = (HomeFragmentJob) adapter.getItem(1);
+                iLocJob.getDataByLocationID(mCurrentLocation.GetIdCity());
             }
         }
 

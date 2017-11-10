@@ -10,7 +10,8 @@ public class Const {
     public static final String METHOD_CITY = HOST_ADDRESS + "/api/location";
     public static final String METHOD_CITY_GPS = HOST_ADDRESS + "/api/location/gps";
 
-    public static final String METHOD_SEARCH = HOST_ADDRESS + "/api/search";
+    public static final String METHOD_SEARCH_EVENT = HOST_ADDRESS + "/api/search/events";
+    public static final String METHOD_SEARCH_JOB = HOST_ADDRESS + "/api/search/jobs";
 
     //EVENT
     public static final String METHOD_EVENT_ACTIVE = HOST_ADDRESS + "/api/events/active";
@@ -26,6 +27,7 @@ public class Const {
 
     //NEARBY
     public static final String METHOD_NEARBY_EVENT = HOST_ADDRESS + "/api/nearby/events";
+    public static final String METHOD_NEARBY_JOB = HOST_ADDRESS + "/api/nearby/jobs";
 
     public static final String METHOD_PROMO = HOST_ADDRESS + "/api/promo";
 

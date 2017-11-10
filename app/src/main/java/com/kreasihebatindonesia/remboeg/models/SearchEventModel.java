@@ -4,7 +4,7 @@ package com.kreasihebatindonesia.remboeg.models;
  * Created by IT DCM on 08/11/2017.
  */
 
-public class SearchModel {
+public class SearchEventModel {
 
     private int mId;
     private int mIdType;
@@ -13,7 +13,7 @@ public class SearchModel {
     private String mTicket;
     private String mAddress;
 
-    public SearchModel(){
+    public SearchEventModel(){
 
     }
 

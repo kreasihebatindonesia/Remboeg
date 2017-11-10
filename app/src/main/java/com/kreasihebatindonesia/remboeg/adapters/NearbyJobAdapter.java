@@ -20,16 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IT DCM on 07/11/2017.
+ * Created by InfinityLogic on 11/10/2017.
  */
 
-public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.ViewHolder> {
+public class NearbyJobAdapter  extends RecyclerView.Adapter<NearbyJobAdapter.ViewHolder> {
 
     private Context context;
     private List<NearbyModel> items;
 
 
-    public NearbyAdapter(Context context) {
+    public NearbyJobAdapter(Context context) {
         this.context = context;
         this.items = new ArrayList<>();
     }
@@ -64,7 +64,7 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.ViewHolder
         public void bind(final NearbyModel locationInformation) {
             this.txtTitle.setText(locationInformation.getTitle());
             this.txtCaption.setText(locationInformation.getAddress());
-            this.txtTicket.setText(locationInformation.getTicket());
+            this.txtTicket.setText(locationInformation.getSalary());
             Glide.with(context).load(Const.URL_UPLOADS + locationInformation.getImage()).into(mImage);
 
             mCardView.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +73,7 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.ViewHolder
                     switch (locationInformation.getIdType()){
                         case 1:
                             Intent i = new Intent(context, DetailEventActivity.class);
-                            i.putExtra("id_event", locationInformation.getId());
+                            i.putExtra("id_job", locationInformation.getId());
                             context.startActivity(i);
                             break;
                     }
@@ -84,14 +84,14 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.ViewHolder
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NearbyJobAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View cardView = LayoutInflater.from(this.context).inflate(R.layout.item_card_nearby, parent, false);
 
-        return new ViewHolder(cardView);
+        return new NearbyJobAdapter.ViewHolder(cardView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(NearbyJobAdapter.ViewHolder holder, int position) {
         holder.bind(this.items.get(position));
     }
 

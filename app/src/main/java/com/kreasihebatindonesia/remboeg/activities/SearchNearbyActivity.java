@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.fragments.NearbyFragmentEvent;
+import com.kreasihebatindonesia.remboeg.fragments.NearbyFragmentJob;
 import com.kreasihebatindonesia.remboeg.interfaces.ISearch;
 import com.kreasihebatindonesia.remboeg.pagers.NearbyViewPagerAdapter;
 
@@ -96,7 +97,7 @@ public class SearchNearbyActivity extends AppCompatActivity implements ISearch {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new NearbyViewPagerAdapter(getSupportFragmentManager(), this);
         adapter.addFrag(NearbyFragmentEvent.newInstance(0), getString(R.string.header_tab_1));
-        adapter.addFrag(NearbyFragmentEvent.newInstance(1), getString(R.string.header_tab_2));
+        adapter.addFrag(NearbyFragmentJob.newInstance(1), getString(R.string.header_tab_2));
         adapter.addFrag(NearbyFragmentEvent.newInstance(2), getString(R.string.header_tab_3));
         adapter.addFrag(NearbyFragmentEvent.newInstance(3), getString(R.string.header_tab_4));
         viewPager.setAdapter(adapter);
