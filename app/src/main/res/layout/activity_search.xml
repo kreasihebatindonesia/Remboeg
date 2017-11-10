@@ -28,7 +28,20 @@
             android:textColorHint="#C4CDE0"
             android:imeOptions="actionDone"/>
 
+        <ImageButton
+            android:id="@+id/mButtonClear"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorTransparent"
+            android:scaleType="fitXY"
+            android:tint="@color/colorPrimary"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_close" />
+
     </android.support.v7.widget.Toolbar>
+
 
     <LinearLayout
         android:id="@+id/mExpandSearch"

@@ -129,6 +129,10 @@ public class SearchFragmentEvent extends Fragment {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
+                                mLoader.setVisibility(View.GONE);
+                                mListView.setVisibility(View.VISIBLE);
+
                                 if (mAdapter != null)
                                     mAdapter.notifyDataSetChanged();
 

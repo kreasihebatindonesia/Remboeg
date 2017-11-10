@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,9 +65,9 @@ public class SearchActivity extends AppCompatActivity implements ISearch {
     TextView txtSearch;
     @BindView(R.id.txtClearHistory)
     TextView txtClearHistory;
+    @BindView(R.id.mButtonClear)
+    ImageButton mButtonClear;
 
-    //@BindView(R.id.mListView)
-    //ListView mListView;
     @BindView(R.id.mListviewHistory)
     ListView mListviewHistory;
     //@BindView(R.id.mLoader)
@@ -115,10 +116,9 @@ public class SearchActivity extends AppCompatActivity implements ISearch {
                 {
                     mResultSearch.setVisibility(View.GONE);
                     mExpandSearch.setVisibility(View.VISIBLE);
+                    mButtonClear.setVisibility(View.GONE);
                 }else{
-                    //getSearch(s.toString());
-                    //mResultSearch.setVisibility(View.VISIBLE);
-                    //mExpandSearch.setVisibility(View.GONE);
+                    mButtonClear.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -172,6 +172,13 @@ public class SearchActivity extends AppCompatActivity implements ISearch {
             @Override
             public void onClick(View v) {
                 clearHistory();
+            }
+        });
+
+        mButtonClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtSearch.setText("");
             }
         });
 
