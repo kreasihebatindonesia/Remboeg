@@ -1,10 +1,9 @@
 package com.kreasihebatindonesia.remboeg.interfaces;
 
 /**
- * Created by InfinityLogic on 11/8/2017.
+ * Created by InfinityLogic on 11/10/2017.
  */
 
-public interface INearby {
+public interface ISearch {
     void onCount(int count, int position);
 }
-

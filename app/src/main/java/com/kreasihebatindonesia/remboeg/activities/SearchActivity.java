@@ -3,6 +3,9 @@ package com.kreasihebatindonesia.remboeg.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -20,9 +23,14 @@ import android.widget.TextView;
 
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.adapters.SearchAdapter;
+import com.kreasihebatindonesia.remboeg.fragments.NearbyFragmentEvent;
+import com.kreasihebatindonesia.remboeg.fragments.SearchFragmentEvent;
 import com.kreasihebatindonesia.remboeg.globals.Const;
+import com.kreasihebatindonesia.remboeg.interfaces.ISearch;
 import com.kreasihebatindonesia.remboeg.models.DbHistoryModel;
 import com.kreasihebatindonesia.remboeg.models.SearchModel;
+import com.kreasihebatindonesia.remboeg.pagers.NearbyViewPagerAdapter;
+import com.kreasihebatindonesia.remboeg.pagers.SearchViewPagerAdapter;
 import com.kreasihebatindonesia.remboeg.utils.SqliteDatabaseHandler;
 import com.kreasihebatindonesia.remboeg.utils.Utils;
 import com.tuyenmonkey.mkloader.MKLoader;
@@ -49,7 +57,7 @@ import okhttp3.Response;
  * Created by IT DCM on 07/11/2017.
  */
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements ISearch {
     @BindView(R.id.mToolbar)
     Toolbar mToolbar;
     @BindView(R.id.txtSearch)
@@ -57,17 +65,22 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.txtClearHistory)
     TextView txtClearHistory;
 
-    @BindView(R.id.mListView)
-    ListView mListView;
+    //@BindView(R.id.mListView)
+    //ListView mListView;
     @BindView(R.id.mListviewHistory)
     ListView mListviewHistory;
-    @BindView(R.id.mLoader)
-    MKLoader mLoader;
+    //@BindView(R.id.mLoader)
+    //MKLoader mLoader;
 
     @BindView(R.id.mExpandSearch)
     LinearLayout mExpandSearch;
     @BindView(R.id.mResultSearch)
     LinearLayout mResultSearch;
+
+    @BindView(R.id.mTabLayout)
+    TabLayout mTabLayout;
+    @BindView(R.id.mViewPager)
+    ViewPager mViewPager;
 
     @BindView(R.id.mCardView)
     CardView mCardView;
@@ -75,7 +88,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private SearchAdapter mAdapter;
     private SqliteDatabaseHandler db;
-
+    private SearchViewPagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,13 +128,16 @@ public class SearchActivity extends AppCompatActivity {
             }
         };
 
+        setupPager();
+
         txtSearch.addTextChangedListener(filterTextWatcher);
 
         txtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId==EditorInfo.IME_ACTION_DONE){
-                    getSearch(txtSearch.getText().toString());
+                    //getSearch(txtSearch.getText().toString());
+                    setTab();
 
                     if(txtSearch.getText().toString().length() > 0){
                         DbHistoryModel history = new DbHistoryModel();
@@ -142,23 +158,13 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SearchModel entry = (SearchModel) parent.getAdapter().getItem(position);
-                Intent i = new Intent(SearchActivity.this, DetailEventActivity.class);
-                i.putExtra("id_event", entry.getId());
-                startActivity(i);
-                //finish();
-            }
-        });
-
         mListviewHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String entry = (String) parent.getAdapter().getItem(position);
                 txtSearch.setText(entry);
-                getSearch(entry);
+                setTab();
+                //getSearch(entry);
             }
         });
 
@@ -205,87 +211,74 @@ public class SearchActivity extends AppCompatActivity {
         getHistorySearch();
     }
 
-    void getSearch(String search){
+    private void setupViewPager(ViewPager viewPager) {
+        adapter = new SearchViewPagerAdapter(getSupportFragmentManager(), this);
+        adapter.addFrag(SearchFragmentEvent.newInstance(0), getString(R.string.header_tab_1));
+        adapter.addFrag(SearchFragmentEvent.newInstance(1), getString(R.string.header_tab_2));
+        adapter.addFrag(SearchFragmentEvent.newInstance(2), getString(R.string.header_tab_3));
+        adapter.addFrag(SearchFragmentEvent.newInstance(3), getString(R.string.header_tab_4));
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
+    }
+
+    void setupPager(){
+        setupViewPager(mViewPager);
+        mTabLayout.setupWithViewPager(mViewPager);
+
+
+        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = mTabLayout.getTabAt(i);
+            tab.setCustomView(adapter.getTabView(i));
+        }
+
+    }
+
+    void setTab(){
+        mTabLayout.setScrollPosition(0,0f,true);
+
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
+                TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                TextView tCount = (TextView)tab.getCustomView().findViewById(R.id.txtTabCount);
+                t.setTextColor(tabIconColor);
+                tCount.setBackgroundResource(R.drawable.rounded_50dp_primary_color);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.colorBlack_30);
+                TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                TextView tCount = (TextView)tab.getCustomView().findViewById(R.id.txtTabCount);
+                t.setTextColor(tabIconColor);
+                tCount.setBackgroundResource(R.drawable.rounded_50dp_black_30_percent);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
+                TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                TextView tCount = (TextView)tab.getCustomView().findViewById(R.id.txtTabCount);
+                t.setTextColor(tabIconColor);
+                tCount.setBackgroundResource(R.drawable.rounded_50dp_primary_color);
+
+            }
+        });
+
+
+        mTabLayout.getTabAt(0).select();
+
         mResultSearch.setVisibility(View.VISIBLE);
         mExpandSearch.setVisibility(View.GONE);
 
-        mLoader.setVisibility(View.VISIBLE);
-        mListView.setVisibility(View.GONE);
+        ((SearchFragmentEvent)adapter.getItem(0)).getSearch(txtSearch.getText().toString());
+    }
 
-        final ArrayList<SearchModel> mSearchModelList = new ArrayList<>();
-
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("search", search + "")
-                .build();
-
-        Request request = new Request.Builder()
-                .url(Const.METHOD_SEARCH)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient client = new OkHttpClient();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                mResultSearch.setVisibility(View.GONE);
-                mExpandSearch.setVisibility(View.VISIBLE);
-                mLoader.setVisibility(View.VISIBLE);
-                mListView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try{
-                    mSearchModelList.clear();
-                    JSONObject jsonObj = new JSONObject(response.body().string());
-                    boolean mError = jsonObj.getInt("status") == 0?true:false;
-                    if(!mError) {
-                        JSONArray jsonArray = new JSONArray(jsonObj.getString("result"));
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject resultObject = jsonArray.getJSONObject(i);
-                            SearchModel sModel = new SearchModel();
-                            sModel.setId(Utils.optInt(resultObject, "id"));
-                            sModel.setIdType(Utils.optInt(resultObject, "id_type"));
-                            sModel.setTitle(Utils.optString(resultObject, "title"));
-                            sModel.setImage(Utils.optString(resultObject, "image"));
-                            sModel.setTicket(Utils.optString(resultObject, "ticket"));
-                            sModel.setAddress(Utils.optString(resultObject, "address"));
-
-                            mSearchModelList.add(sModel);
-                        }
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-
-                                mResultSearch.setVisibility(View.VISIBLE);
-                                mExpandSearch.setVisibility(View.GONE);
-
-                                mLoader.setVisibility(View.GONE);
-                                mListView.setVisibility(View.VISIBLE);
-
-                                mAdapter = new SearchAdapter(SearchActivity.this, mSearchModelList);
-                                mListView.setAdapter(mAdapter);
-
-                            }
-                        });
-
-                    }else{
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mResultSearch.setVisibility(View.GONE);
-                                mExpandSearch.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    @Override
+    public void onCount(int count, int position) {
+        TextView tCount = (TextView)mTabLayout.getTabAt(position).getCustomView().findViewById(R.id.txtTabCount);
+        tCount.setText(Integer.toString(count));
     }
 }

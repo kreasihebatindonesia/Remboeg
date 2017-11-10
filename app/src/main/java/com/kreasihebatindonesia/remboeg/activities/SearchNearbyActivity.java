@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.fragments.NearbyFragmentEvent;
-import com.kreasihebatindonesia.remboeg.interfaces.INearby;
+import com.kreasihebatindonesia.remboeg.interfaces.ISearch;
 import com.kreasihebatindonesia.remboeg.pagers.NearbyViewPagerAdapter;
 
 import butterknife.BindView;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by IT DCM on 07/11/2017.
  */
 
-public class SearchNearbyActivity extends AppCompatActivity implements INearby {
+public class SearchNearbyActivity extends AppCompatActivity implements ISearch {
     @BindView(R.id.mToolbar)
     Toolbar mToolbar;
     @BindView(R.id.mTabLayout)

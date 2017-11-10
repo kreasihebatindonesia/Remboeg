@@ -40,9 +40,9 @@
             android:id="@+id/mCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             app:cardBackgroundColor="@color/colorTransparent"
-            app:cardElevation="0dp"
-            android:clickable="true">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,26 +155,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <com.tuyenmonkey.mkloader.MKLoader
-            android:id="@+id/mLoader"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            app:mk_color="@color/colorPrimary"
-            app:mk_type="FourPulse" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/mTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/colorWhite"
+            app:tabBackground="@color/colorWhite"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabMode="scrollable"
+            app:tabPadding="5dp"
+            app:tabSelectedTextColor="@color/colorWhite"
+            app:tabTextColor="@color/colorPrimarySmooth">
 
-        <ListView
-            android:id="@+id/mListView"
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+
+            android:id="@+id/mViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground"
-            android:dividerHeight="1dp"
-            android:drawSelectorOnTop="false"
-            android:minHeight="250dp"
-            android:visibility="gone" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </android.support.v4.view.ViewPager>
 
     </LinearLayout>
 

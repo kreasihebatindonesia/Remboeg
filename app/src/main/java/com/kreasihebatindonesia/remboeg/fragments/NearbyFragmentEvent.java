@@ -28,7 +28,7 @@ import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.SearchNearbyActivity;
 import com.kreasihebatindonesia.remboeg.adapters.NearbyAdapter;
 import com.kreasihebatindonesia.remboeg.globals.Const;
-import com.kreasihebatindonesia.remboeg.interfaces.INearby;
+import com.kreasihebatindonesia.remboeg.interfaces.ISearch;
 import com.kreasihebatindonesia.remboeg.models.NearbyModel;
 import com.kreasihebatindonesia.remboeg.services.GPSTracker;
 import com.kreasihebatindonesia.remboeg.utils.Utils;
@@ -84,7 +84,7 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nearby_event, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_nearby_event, container, false);
 
         ButterKnife.bind(this, view);
 
@@ -221,7 +221,7 @@ public class NearbyFragmentEvent extends Fragment implements OnMapReadyCallback 
                             public void run() {
                                 initializeMarker();
                                 mNearbyAdapter.setItems(mNearbys);
-                                INearby mNearby = (SearchNearbyActivity) getActivity();
+                                ISearch mNearby = (SearchNearbyActivity) getActivity();
                                 mNearby.onCount(jsonArray.length(), getArguments().getInt("index"));
 
                             }

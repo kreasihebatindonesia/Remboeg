@@ -5,7 +5,7 @@ package com.kreasihebatindonesia.remboeg.globals;
  */
 
 public class Const {
-    public static final String HOST_ADDRESS = "http://192.168.0.126/event";
+    public static final String HOST_ADDRESS = "http://192.168.100.11/event";
 
     public static final String METHOD_CITY = HOST_ADDRESS + "/api/location";
     public static final String METHOD_CITY_GPS = HOST_ADDRESS + "/api/location/gps";
