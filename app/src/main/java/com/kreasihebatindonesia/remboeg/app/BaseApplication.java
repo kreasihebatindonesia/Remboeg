@@ -1,6 +1,8 @@
 package com.kreasihebatindonesia.remboeg.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.kreasihebatindonesia.remboeg.networks.ConnectivityReceiver;
 import com.kreasihebatindonesia.remboeg.utils.TypefaceUtil;
@@ -11,6 +13,12 @@ import com.kreasihebatindonesia.remboeg.utils.TypefaceUtil;
 
 public class BaseApplication extends Application {
     private static BaseApplication mInstance;
+
+    @Override
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(context);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

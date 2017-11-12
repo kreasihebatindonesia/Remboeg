@@ -48,7 +48,8 @@
             android:background="@drawable/border_bottom"
             android:gravity="center_vertical|center_horizontal|center"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="25dp"
@@ -79,7 +80,8 @@
             android:background="@drawable/border_bottom"
             android:gravity="center_vertical|center_horizontal|center"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="25dp"
@@ -110,7 +112,8 @@
             android:background="@drawable/border_bottom"
             android:gravity="center_vertical|center_horizontal|center"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="25dp"

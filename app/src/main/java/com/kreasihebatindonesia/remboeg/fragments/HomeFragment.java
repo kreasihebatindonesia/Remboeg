@@ -245,6 +245,61 @@ public class HomeFragment extends Fragment implements ILocation{
 
                     }
                 } catch (JSONException e) {
+                    mCurrentLocation = new LocationModel(14, "YOGYAKARTA");
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Toast.makeText(getContext(), mCurrentLocation.GetNameCity(), Toast.LENGTH_LONG).show();
+
+                            setupViewPager(mViewPager);
+                            mTabLayout.setupWithViewPager(mViewPager);
+
+                            for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+                                TabLayout.Tab tab = mTabLayout.getTabAt(i);
+                                tab.setCustomView(adapter.getTabView(i));
+                            }
+
+                            mTabLayout.setScrollPosition(0,0f,true);
+
+                            mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+                            mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                                @Override
+                                public void onTabSelected(TabLayout.Tab tab) {
+                                    int tabIconColor = ContextCompat.getColor(getContext(), R.color.colorWhite);
+                                    TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                                    t.setTextColor(tabIconColor);
+                                }
+
+                                @Override
+                                public void onTabUnselected(TabLayout.Tab tab) {
+                                    int tabIconColor = ContextCompat.getColor(getContext(), R.color.colorPrimarySmooth);
+                                    TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                                    t.setTextColor(tabIconColor);
+                                }
+
+                                @Override
+                                public void onTabReselected(TabLayout.Tab tab) {
+                                    int tabIconColor = ContextCompat.getColor(getContext(), R.color.colorWhite);
+                                    TextView t = (TextView)tab.getCustomView().findViewById(R.id.txtTabTitle);
+                                    t.setTextColor(tabIconColor);
+                                }
+                            });
+
+
+
+                            mTabLayout.getTabAt(0).select();
+
+                            lytLocation.setVisibility(View.VISIBLE);
+                            txtSelectCity.setText(mCurrentLocation.GetNameCity());
+
+
+                            Const.DUMMY_LOCATION_ID = mCurrentLocation.GetIdCity();
+
+
+                        }
+                    });
                     e.printStackTrace();
                 }
 

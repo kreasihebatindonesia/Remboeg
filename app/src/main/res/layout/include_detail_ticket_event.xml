@@ -47,7 +47,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/border_bottom"
             android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="25dp"
@@ -63,7 +64,6 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="GRATIS"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp"

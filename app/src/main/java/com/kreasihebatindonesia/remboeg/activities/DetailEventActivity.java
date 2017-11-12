@@ -101,6 +101,12 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
     LinearLayout mContentPhone;
     @BindView(R.id.mTicket)
     LinearLayout mTicket;
+    @BindView(R.id.mDateStart)
+    LinearLayout mDateStart;
+    @BindView(R.id.mDateEnd)
+    LinearLayout mDateEnd;
+    @BindView(R.id.mMapLocation)
+    LinearLayout mMapLocation;
 
     @BindView(R.id.btnPin)
     Button btnPin;
@@ -231,16 +237,21 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
                                 mToolbar.setTitle(mEvent.getTitleEvent());
                                 Glide.with(getApplicationContext()).load(Const.URL_UPLOADS + mEvent.getImageEvent()).into(mImageEvent);
 
+                                txtTitle.setVisibility(mEvent.getTitleEvent() == null? View.GONE: View.VISIBLE);
+                                txtDesc.setVisibility(mEvent.getDescEvent() == null? View.GONE: View.VISIBLE);
                                 txtTitle.setText(mEvent.getTitleEvent());
                                 txtDesc.setText(mEvent.getDescEvent());
                                 txtVenue.setText(mEvent.getVenueEvent());
                                 txtAddress.setText(mEvent.getAddressEvent());
 
+                                mDateStart.setVisibility(mEvent.getDateStartEvent() == null? View.GONE: View.VISIBLE);
+                                mDateEnd.setVisibility(mEvent.getDateEndEvent() == null? View.GONE: View.VISIBLE);
                                 txtDateStart.setText(mEvent.getDateStartEvent());
                                 txtDateEnd.setText(mEvent.getDateEndEvent());
                                 txtTimeStart.setText(mEvent.getTimeStartEvent());
                                 txtTimeEnd.setText(mEvent.getTimeEndEvent());
 
+                                mMapLocation.setVisibility(mEvent.getLocationLatEvent() == 0? View.GONE: View.VISIBLE);
                                 getLocationMap(mEvent.getLocationLatEvent(), mEvent.getLocationLngEvent(), mEvent.getVenueEvent(), mEvent.getAddressEvent(), mEvent.getTitleEvent());
 
                                 mContentEmail.setVisibility(mEvent.getEmailEvent() == null? View.GONE: View.VISIBLE);
@@ -314,6 +325,10 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
 
             }
         });
+    }
+
+    void HideView(){
+        mTicket.setVisibility(View.GONE);
     }
 
     void setViewCountEvent(int id_event) {

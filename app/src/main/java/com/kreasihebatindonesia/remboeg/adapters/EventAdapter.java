@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.DetailEventActivity;
+import com.kreasihebatindonesia.remboeg.component.DrawableTextView;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.models.EventModel;
 import com.kreasihebatindonesia.remboeg.utils.FormatNumber;
@@ -30,8 +31,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         public TextView mTitleEvent;
         public ImageView mImageEvent;
         public TextView mTicketEvent;
-        public TextView txtView;
-        public TextView txtLike;
+        public DrawableTextView txtView;
+        public DrawableTextView txtLike;
 
 
         public MyViewHolder(View view) {
@@ -39,8 +40,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             mTitleEvent = (TextView) view.findViewById(R.id.mTitleEvent);
             mImageEvent = (ImageView) view.findViewById(R.id.mImageEvent);
             mTicketEvent = (TextView) view.findViewById(R.id.mTicketEvent);
-            txtView = (TextView) view.findViewById(R.id.txtView);
-            txtLike = (TextView) view.findViewById(R.id.txtLike);
+            txtView = (DrawableTextView) view.findViewById(R.id.txtView);
+            txtLike = (DrawableTextView) view.findViewById(R.id.txtLike);
         }
     }
 

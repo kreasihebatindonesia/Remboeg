@@ -1,5 +1,13 @@
 package com.kreasihebatindonesia.remboeg.utils;
 
+import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+
 import org.json.JSONObject;
 
 /**
@@ -18,5 +26,14 @@ public class Utils {
 
     public static double optDouble(JSONObject json, String key) {
         return json.isNull(key) ? 0 : json.optDouble(key);
+    }
+
+    public static void setDrawableTint(Context context, Drawable drawable, int color){
+        int newColor = ContextCompat.getColor(context, color);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            DrawableCompat.setTint(drawable, color);
+        } else {
+            drawable.mutate().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        }
     }
 }

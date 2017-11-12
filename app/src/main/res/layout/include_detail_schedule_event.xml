@@ -31,6 +31,7 @@
         android:visibility="visible">
 
         <LinearLayout
+            android:id="@+id/mDateStart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -38,7 +39,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/border_bottom"
             android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/txtDateStart"
@@ -64,6 +66,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/mDateEnd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -71,7 +74,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/border_bottom"
             android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/txtDateEnd"
