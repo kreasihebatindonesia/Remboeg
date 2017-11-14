@@ -5,8 +5,10 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.networks.ConnectivityReceiver;
 import com.kreasihebatindonesia.remboeg.utils.TypefaceUtil;
+
 
 /**
  * Created by IT DCM on 06/11/2017.
@@ -30,6 +32,8 @@ public class BaseApplication extends Application {
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/Bariol_Regular.otf");
 
     }
+
+
 
     public static synchronized BaseApplication getInstance() {
         return mInstance;

@@ -39,7 +39,7 @@ public class SearchNearbyActivity extends AppCompatActivity implements ISearch {
 
         ButterKnife.bind(this);
 
-        mToolbar.setTitle("Near Me");
+        mToolbar.setTitle("Sekitar Saya");
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

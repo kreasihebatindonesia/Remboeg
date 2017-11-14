@@ -11,4 +11,5 @@
         <attr name="cit_iconHeight" format="dimension" />
         <attr name="cit_iconColor" format="color" />
     </declare-styleable>
+
 </resources>

@@ -1,6 +1,7 @@
 package com.kreasihebatindonesia.remboeg.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -143,6 +144,7 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
 
         ConnectivityReceiver.isConnected();
     }
+
 
     public int getStatusBarHeight() {
         int result = 0;

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.DetailEventActivity;
+import com.kreasihebatindonesia.remboeg.component.CompoundIconTextView;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.models.EventModel;
 import com.kreasihebatindonesia.remboeg.models.JobModel;
@@ -32,8 +33,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.MyViewHolder> {
         public ImageView mImageJob;
         public TextView mSalary;
         public TextView mEndDate;
-        public TextView txtView;
-        public TextView txtLike;
+        public CompoundIconTextView txtView;
+        public CompoundIconTextView txtLike;
 
 
         public MyViewHolder(View view) {
@@ -42,8 +43,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.MyViewHolder> {
             mImageJob = (ImageView) view.findViewById(R.id.mImageJob);
             mSalary = (TextView) view.findViewById(R.id.mSalary);
             mEndDate = (TextView) view.findViewById(R.id.mEndDate);
-            txtView = (TextView) view.findViewById(R.id.txtView);
-            txtLike = (TextView) view.findViewById(R.id.txtLike);
+            txtView = (CompoundIconTextView) view.findViewById(R.id.txtView);
+            txtLike = (CompoundIconTextView) view.findViewById(R.id.txtLike);
         }
     }
 

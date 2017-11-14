@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
@@ -56,31 +57,35 @@
                 android:gravity="bottom|left"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
                     android:id="@+id/txtView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:drawableTint="@color/colorBlack_80"
-                    android:drawableTop="@drawable/icon_view_12dp"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack_80"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:cit_drawableTop="@drawable/ic_eye"
+                    app:cit_iconColor="@color/colorBlack_30"
+                    app:cit_iconHeight="16dp"
+                    app:cit_iconWidth="16dp"/>
 
-                <TextView
+                <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
                     android:id="@+id/txtLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:drawableTint="@color/colorBlack_80"
-                    android:drawableTop="@drawable/icon_like_12dp"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack_80"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:cit_drawableTop="@drawable/ic_thumb_up"
+                    app:cit_iconColor="@color/colorBlack_30"
+                    app:cit_iconHeight="16dp"
+                    app:cit_iconWidth="16dp"/>
 
                 <TextView
                     android:id="@+id/mSalary"

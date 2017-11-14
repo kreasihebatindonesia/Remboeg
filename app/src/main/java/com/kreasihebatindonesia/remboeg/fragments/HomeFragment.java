@@ -174,7 +174,8 @@ public class HomeFragment extends Fragment implements ILocation{
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                mCurrentLocation = new LocationModel(14, "YOGYAKARTA");
+                Const.DUMMY_LOCATION_ID = mCurrentLocation.GetIdCity();
             }
 
             @Override
