@@ -11,16 +11,18 @@
     android:paddingRight="15dp"
     android:paddingTop="6dp">
 
-    <TextView
+    <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_chevron_down"
-        android:drawableTint="@color/colorBlack_30"
         android:gravity="center_vertical"
         android:text="TIKET"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"        app:cit_drawableRight="@drawable/ic_chevron_down"
+        app:cit_iconColor="@color/colorBlack_30"
+        app:cit_iconHeight="20dp"
+        app:cit_iconWidth="20dp"
+/>
 
     <LinearLayout
         android:id="@+id/mExpandTicket"
@@ -33,43 +35,34 @@
             android:id="@+id/txtTicketInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Informasi tidak tersedia."
             android:textColor="@color/colorBlack_30"
             android:textSize="16sp"
             android:visibility="gone" />
 
-        <LinearLayout
-            android:id="@+id/mTicket"
+        <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
+            android:id="@+id/txtTicket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:background="@drawable/border_bottom"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:adjustViewBounds="true"
-                android:tint="@color/colorPrimary"
-                app:srcCompat="@drawable/ic_ticket" />
-
-            <TextView
-                android:id="@+id/txtTicket"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:textAllCaps="true"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+            android:drawablePadding="10dp"
+            android:gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:cit_drawableLeft="@drawable/ic_ticket"
+            app:cit_iconColor="@color/colorPrimary"
+            app:cit_iconHeight="25dp"
+            app:cit_iconWidth="25dp"
+            app:textAllCaps="true" />
 
     </LinearLayout>
 

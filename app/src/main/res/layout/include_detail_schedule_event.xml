@@ -11,7 +11,7 @@
     android:paddingRight="15dp"
     android:paddingTop="5dp">
 
-    <TextView
+    <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -19,8 +19,10 @@
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:drawableRight="@drawable/ic_chevron_down"
-        android:drawableTint="@color/colorBlack_30"/>
+        app:cit_drawableRight="@drawable/ic_chevron_down"
+        app:cit_iconColor="@color/colorBlack_30"
+        app:cit_iconHeight="20dp"
+        app:cit_iconWidth="20dp" />
 
     <LinearLayout
         android:id="@+id/mExpandSchedule"

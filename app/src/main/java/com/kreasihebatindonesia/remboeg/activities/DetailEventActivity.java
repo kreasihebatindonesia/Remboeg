@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.app.BaseApplication;
+import com.kreasihebatindonesia.remboeg.component.CompoundIconTextView;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.models.EventModel;
 import com.kreasihebatindonesia.remboeg.networks.ConnectivityReceiver;
@@ -80,27 +81,20 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
     @BindView(R.id.txtTimeEnd)
     TextView txtTimeEnd;
     @BindView(R.id.txtEmail)
-    TextView txtEmail;
+    CompoundIconTextView txtEmail;
     @BindView(R.id.txtWebsite)
-    TextView txtWebsite;
+    CompoundIconTextView txtWebsite;
     @BindView(R.id.txtPhone)
-    TextView txtPhone;
+    CompoundIconTextView txtPhone;
     @BindView(R.id.txtTicket)
-    TextView txtTicket;
+    CompoundIconTextView txtTicket;
 
     @BindView(R.id.txtContactInfo)
     TextView txtContactInfo;
     @BindView(R.id.txtTicketInfo)
     TextView txtTicketInfo;
 
-    @BindView(R.id.mContentEmail)
-    LinearLayout mContentEmail;
-    @BindView(R.id.mContentWebsite)
-    LinearLayout mContentWebsite;
-    @BindView(R.id.mContentPhone)
-    LinearLayout mContentPhone;
-    @BindView(R.id.mTicket)
-    LinearLayout mTicket;
+
     @BindView(R.id.mDateStart)
     LinearLayout mDateStart;
     @BindView(R.id.mDateEnd)
@@ -254,9 +248,9 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
                                 mMapLocation.setVisibility(mEvent.getLocationLatEvent() == 0? View.GONE: View.VISIBLE);
                                 getLocationMap(mEvent.getLocationLatEvent(), mEvent.getLocationLngEvent(), mEvent.getVenueEvent(), mEvent.getAddressEvent(), mEvent.getTitleEvent());
 
-                                mContentEmail.setVisibility(mEvent.getEmailEvent() == null? View.GONE: View.VISIBLE);
-                                mContentWebsite.setVisibility(mEvent.getWebsiteEvent() == null? View.GONE: View.VISIBLE);
-                                mContentPhone.setVisibility(mEvent.getContactEvent() == null? View.GONE: View.VISIBLE);
+                                txtEmail.setVisibility(mEvent.getEmailEvent() == null? View.GONE: View.VISIBLE);
+                                txtWebsite.setVisibility(mEvent.getWebsiteEvent() == null? View.GONE: View.VISIBLE);
+                                txtPhone.setVisibility(mEvent.getContactEvent() == null? View.GONE: View.VISIBLE);
 
                                 if(mEvent.getEmailEvent() != null){
                                     mListCall.add("Email");
@@ -276,10 +270,8 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
                                 txtPhone.setText(mEvent.getContactEvent());
 
                                 txtTicket.setText(mEvent.getTicketEvent());
-                                mTicket.setVisibility(mEvent.getTicketEvent() == null? View.GONE: View.VISIBLE);
-                                if(mEvent.getTicketEvent() == null){
-                                    txtTicketInfo.setVisibility(View.VISIBLE);
-                                }
+                                txtTicket.setVisibility(mEvent.getTicketEvent() == null? View.GONE: View.VISIBLE);
+                                txtTicketInfo.setVisibility(mEvent.getTicketEvent() == null? View.VISIBLE : View.GONE);
 
                                 if (mEvent.getLikeEvent()) {
                                     btnLike.setBackgroundResource(R.drawable.button_rounded_50dp_primary_color);
@@ -325,10 +317,6 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
 
             }
         });
-    }
-
-    void HideView(){
-        mTicket.setVisibility(View.GONE);
     }
 
     void setViewCountEvent(int id_event) {

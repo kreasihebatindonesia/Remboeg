@@ -11,16 +11,18 @@
     android:paddingRight="15dp"
     android:paddingTop="5dp">
 
-    <TextView
+    <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_chevron_down"
-        android:drawableTint="@color/colorBlack_30"
         android:gravity="center_vertical"
         android:text="KONTAK"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:cit_drawableRight="@drawable/ic_chevron_down"
+        app:cit_iconColor="@color/colorBlack_30"
+        app:cit_iconHeight="20dp"
+        app:cit_iconWidth="20dp" />
 
     <LinearLayout
         android:id="@+id/mExpandInfo"
@@ -33,106 +35,76 @@
             android:id="@+id/txtContactInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Informasi tidak tersedia."
             android:textColor="@color/colorBlack_30"
             android:textSize="16sp"
             android:visibility="gone" />
 
-        <LinearLayout
-            android:id="@+id/mContentEmail"
+
+        <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
+            android:id="@+id/txtEmail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:background="@drawable/border_bottom"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:visibility="gone">
+            android:drawablePadding="10dp"
+            android:gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:cit_drawableLeft="@drawable/ic_email"
+            app:cit_iconColor="@color/colorPrimary"
+            app:cit_iconHeight="25dp"
+            app:cit_iconWidth="25dp" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:tint="@color/colorPrimary"
-                app:srcCompat="@drawable/ic_email" />
 
-            <TextView
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/mContentWebsite"
+        <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
+            android:id="@+id/txtWebsite"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:background="@drawable/border_bottom"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:visibility="gone">
+            android:drawablePadding="10dp"
+            android:gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:cit_drawableLeft="@drawable/ic_web"
+            app:cit_iconColor="@color/colorPrimary"
+            app:cit_iconHeight="25dp"
+            app:cit_iconWidth="25dp" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:tint="@color/colorPrimary"
-                app:srcCompat="@drawable/ic_web" />
 
-            <TextView
-                android:id="@+id/txtWebsite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/mContentPhone"
+        <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
+            android:id="@+id/txtPhone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:background="@drawable/border_bottom"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:visibility="gone">
+            android:drawablePadding="10dp"
+            android:gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:cit_drawableLeft="@drawable/ic_phone_classic"
+            app:cit_iconColor="@color/colorPrimary"
+            app:cit_iconHeight="25dp"
+            app:cit_iconWidth="25dp" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:tint="@color/colorPrimary"
-                app:srcCompat="@drawable/ic_phone_classic" />
-
-            <TextView
-                android:id="@+id/txtPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
