@@ -52,6 +52,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.android.support:multidex:1.0.1'
-    compile 'com.github.aakira:compound-icon-textview:1.2.0@aar'
     testCompile 'junit:junit:4.12'
 }

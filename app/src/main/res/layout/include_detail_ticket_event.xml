@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Informasi tidak tersedia."
-            android:textColor="@color/colorBlack_80"
+            android:textColor="@color/colorBlack_30"
             android:textSize="16sp"
             android:visibility="gone" />
 

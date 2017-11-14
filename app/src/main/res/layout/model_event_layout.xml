@@ -49,7 +49,7 @@
                 android:gravity="bottom|left"
                 android:orientation="horizontal">
 
-                <com.github.aakira.compoundicontextview.CompoundIconTextView
+                <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
                     android:id="@+id/txtView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                     app:cit_iconHeight="16dp"
                     app:cit_iconWidth="16dp"/>
 
-                <com.github.aakira.compoundicontextview.CompoundIconTextView
+                <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
                     android:id="@+id/txtLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

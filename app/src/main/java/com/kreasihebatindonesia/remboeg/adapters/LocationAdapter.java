@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.LocationActivity;
+import com.kreasihebatindonesia.remboeg.component.CompoundIconTextView;
 import com.kreasihebatindonesia.remboeg.models.LocationModel;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
             holder = new ViewHolder();
 
             holder.mCityName = (TextView) view.findViewById(R.id.mCityName);
-            holder.mIcoRight = (TextView) view.findViewById(R.id.mIcoRight);
+            holder.mIcoRight = (CompoundIconTextView) view.findViewById(R.id.mIcoRight);
 
             view.setTag(holder);
 
@@ -127,6 +128,6 @@ public class LocationAdapter extends BaseAdapter implements Filterable {
 
     static class ViewHolder {
         TextView mCityName;
-        TextView mIcoRight;
+        CompoundIconTextView mIcoRight;
     }
 }

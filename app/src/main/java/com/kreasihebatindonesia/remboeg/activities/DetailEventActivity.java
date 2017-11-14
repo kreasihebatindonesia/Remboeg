@@ -305,7 +305,7 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
                                         if (mListCall.size() > 0)
                                             showCallDialog();
                                         else
-                                            Snackbar.make(btnCall, "Tidak ada informasi.", Snackbar.LENGTH_SHORT).show();
+                                            Snackbar.make(btnCall, "Informasi tidak tersedia.", Snackbar.LENGTH_SHORT).show();
                                     }
                                 });
 
