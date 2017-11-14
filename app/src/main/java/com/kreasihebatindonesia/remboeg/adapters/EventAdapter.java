@@ -10,12 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.aakira.compoundicontextview.CompoundIconTextView;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.DetailEventActivity;
-import com.kreasihebatindonesia.remboeg.component.DrawableTextView;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.models.EventModel;
 import com.kreasihebatindonesia.remboeg.utils.FormatNumber;
+
 
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         public TextView mTitleEvent;
         public ImageView mImageEvent;
         public TextView mTicketEvent;
-        public DrawableTextView txtView;
-        public DrawableTextView txtLike;
+        public CompoundIconTextView txtView;
+        public CompoundIconTextView txtLike;
 
 
         public MyViewHolder(View view) {
@@ -40,8 +41,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             mTitleEvent = (TextView) view.findViewById(R.id.mTitleEvent);
             mImageEvent = (ImageView) view.findViewById(R.id.mImageEvent);
             mTicketEvent = (TextView) view.findViewById(R.id.mTicketEvent);
-            txtView = (DrawableTextView) view.findViewById(R.id.txtView);
-            txtLike = (DrawableTextView) view.findViewById(R.id.txtLike);
+            txtView = (CompoundIconTextView) view.findViewById(R.id.txtView);
+            txtLike = (CompoundIconTextView) view.findViewById(R.id.txtLike);
         }
     }
 

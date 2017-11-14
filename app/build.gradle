@@ -5,7 +5,7 @@ android {
         signed {
             keyAlias 'KreasiHebatIndonesia'
             keyPassword '@Imbangmuah90'
-            storeFile file('E:/PROJECT/PER PROJECT/APLIKASI EVENT/ANDROID/Remboeg/signedkey.jks')
+            storeFile file('E:/ANDROID STUDIO/GIT/Remboeg/signedkey.jks')
             storePassword '@Imbangmuah90'
         }
     }
@@ -19,6 +19,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -30,6 +31,7 @@ android {
             signingConfig signingConfigs.signed
         }
     }
+
 }
 
 dependencies {
@@ -50,5 +52,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.github.aakira:compound-icon-textview:1.2.0@aar'
     testCompile 'junit:junit:4.12'
 }
