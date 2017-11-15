@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.app.BaseApplication;
+import com.kreasihebatindonesia.remboeg.component.CompoundIconTextView;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.models.JobModel;
 import com.kreasihebatindonesia.remboeg.networks.ConnectivityReceiver;
@@ -62,10 +63,20 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
     TextView txtVenue;
     @BindView(R.id.txtAddress)
     TextView txtAddress;
+    @BindView(R.id.txtSalary)
+    CompoundIconTextView txtSalary;
+    @BindView(R.id.txtSalaryInfo)
+    TextView txtSalaryInfo;
+    @BindView(R.id.txtBenefitInfo)
+    TextView txtBenefitInfo;
+    @BindView(R.id.txtBenefit)
+    TextView txtBenefit;
 
     @BindView(R.id.mMapLocation)
     LinearLayout mMapLocation;
 
+    @BindView(R.id.lytInstanceClassification)
+    LinearLayout lytInstanceClassification;
 
     SupportMapFragment mMapView;
     GoogleMap map;
@@ -178,6 +189,8 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                mToolbar.setTitle(mJob.getTitleJob());
+
                                 Glide.with(getApplicationContext()).load(Const.URL_UPLOADS + mJob.getImageJob()).into(mImageJob);
 
                                 txtTitleJob.setText(mJob.getTitleJob());
@@ -190,6 +203,16 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
 
                                 txtVenue.setText(mJob.getCompanyJob());
                                 txtAddress.setText(mJob.getAddressJob());
+
+                                txtSalary.setVisibility(mJob.getSalaryJob() == null? View.GONE: View.VISIBLE);
+                                txtSalaryInfo.setVisibility(mJob.getSalaryJob() == null? View.VISIBLE : View.GONE);
+                                txtSalary.setText(mJob.getSalaryJob());
+
+                                txtBenefit.setVisibility(mJob.getBenefitJob() == null? View.GONE: View.VISIBLE);
+                                txtBenefitInfo.setVisibility(mJob.getBenefitJob() == null? View.VISIBLE : View.GONE);
+                                txtBenefit.setText(mJob.getBenefitJob());
+
+                                setRequiredJob(mJob);
                             }
                         });
                     }
@@ -223,5 +246,18 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
             }
         });
 
+    }
+
+    void setRequiredJob(JobModel jobModel){
+        for(int x=0;x<jobModel.getPositionModels().size();x++) {
+
+            View child = getLayoutInflater().inflate(R.layout.item_job_required, null);
+            TextView txtRequiredName = (TextView) child.findViewById(R.id.txtRequiredName);
+            TextView txtRequiredDesc = (TextView) child.findViewById(R.id.txtRequiredDesc);
+            JobModel.PositionModel mPos = jobModel.getPositionModels().get(x);
+            txtRequiredName.setText(mPos.getNamePosition());
+            txtRequiredDesc.setText(mPos.getDescPosition());
+            lytInstanceClassification.addView(child);
+        }
     }
 }

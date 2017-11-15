@@ -86,7 +86,7 @@ public class HomeFragmentEvent extends Fragment implements ILocation {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getFromServer(getArguments().getInt("id_location"));
+                getFromServer(Const.DUMMY_LOCATION_ID);
             }
         });
 

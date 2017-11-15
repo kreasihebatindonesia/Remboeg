@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/border_top_with_background_white"
+    android:orientation="vertical"
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp">
+
+    <com.kreasihebatindonesia.remboeg.component.CompoundIconTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="KLASIFIKASI YANG DIBUTUHKAN"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cit_drawableRight="@drawable/ic_chevron_down"
+        app:cit_iconColor="@color/colorBlack_30"
+        app:cit_iconHeight="20dp"
+        app:cit_iconWidth="20dp" />
+
+    <LinearLayout
+        android:id="@+id/lytInstanceClassification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+</LinearLayout>

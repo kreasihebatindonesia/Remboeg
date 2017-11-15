@@ -148,6 +148,8 @@ public class HomeFragment extends Fragment implements ILocation{
                 mCurrentLocation = gson.fromJson(data.getExtras().getString("mCurrentLocation"), LocationModel.class);
                 txtSelectCity.setText(mCurrentLocation.GetNameCity());
 
+                Const.DUMMY_LOCATION_ID = mCurrentLocation.GetIdCity();
+
                 ILocation iLocEvent = (HomeFragmentEvent) adapter.getItem(0);
                 iLocEvent.getDataByLocationID(mCurrentLocation.GetIdCity());
 

@@ -2,6 +2,7 @@ package com.kreasihebatindonesia.remboeg.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.activities.DetailEventActivity;
 import com.kreasihebatindonesia.remboeg.activities.DetailJobActivity;
 import com.kreasihebatindonesia.remboeg.component.CompoundIconTextView;
+import com.kreasihebatindonesia.remboeg.component.TopAlignedImageView;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.models.EventModel;
 import com.kreasihebatindonesia.remboeg.models.JobModel;
@@ -31,7 +33,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitleJob;
-        public ImageView mImageJob;
+        public TopAlignedImageView mImageJob;
         public TextView mSalary;
         public TextView mEndDate;
         public CompoundIconTextView txtView;
@@ -41,7 +43,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.MyViewHolder> {
         public MyViewHolder(View view) {
             super(view);
             mTitleJob = (TextView) view.findViewById(R.id.mTitleJob);
-            mImageJob = (ImageView) view.findViewById(R.id.mImageJob);
+            mImageJob = (TopAlignedImageView) view.findViewById(R.id.mImageJob);
             mSalary = (TextView) view.findViewById(R.id.mSalary);
             mEndDate = (TextView) view.findViewById(R.id.mEndDate);
             txtView = (CompoundIconTextView) view.findViewById(R.id.txtView);
@@ -67,7 +69,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.MyViewHolder> {
         final JobModel mJob = mJobModelList.get(position);
 
         holder.mTitleJob.setText(mJob.getTitleJob());
+
         Glide.with(mContext).load(Const.URL_UPLOADS + mJob.getImageJob()).into(holder.mImageJob);
+
         holder.mEndDate.setText(mJob.getEndDateJob());
         holder.mSalary.setText(mJob.getSalaryJob());
         holder.txtView.setText(FormatNumber.getFormatNumber(mJob.getTotalViews()) + "");

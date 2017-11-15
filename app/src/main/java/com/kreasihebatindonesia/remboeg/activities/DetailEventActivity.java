@@ -112,6 +112,8 @@ public class DetailEventActivity extends AppCompatActivity implements Connectivi
     @BindView(R.id.btnShare)
     Button btnShare;
 
+
+
     SupportMapFragment mMapView;
     GoogleMap map;
 

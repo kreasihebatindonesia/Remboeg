@@ -20,14 +20,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
+            <com.kreasihebatindonesia.remboeg.component.TopAlignedImageView
                 android:id="@+id/mImageJob"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:adjustViewBounds="false"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:scaleType="fitXY" />
+                android:scaleType="matrix" />
 
             <TextView
                 android:id="@+id/mTitleJob"

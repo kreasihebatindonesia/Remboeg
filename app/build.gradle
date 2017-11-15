@@ -5,7 +5,7 @@ android {
         signed {
             keyAlias 'KreasiHebatIndonesia'
             keyPassword '@Imbangmuah90'
-            storeFile file('E:/ANDROID STUDIO/GIT/Remboeg/signedkey.jks')
+            storeFile file('E:/PROJECT/PER PROJECT/APLIKASI EVENT/ANDROID/Remboeg/signedkey.jks')
             storePassword '@Imbangmuah90'
         }
     }
@@ -52,6 +52,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.android.support:multidex:1.0.1'
-    testCompile 'junit:junit:4.12'
 
+    testCompile 'junit:junit:4.12'
 }
