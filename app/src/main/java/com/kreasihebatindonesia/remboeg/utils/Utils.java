@@ -28,6 +28,10 @@ public class Utils {
         return json.isNull(key) ? 0 : json.optDouble(key);
     }
 
+    public static boolean optBoolean(JSONObject json, String key) {
+        return json.isNull(key) ? false : json.optBoolean(key);
+    }
+
     public static void setDrawableTint(Context context, Drawable drawable, int color){
         int newColor = ContextCompat.getColor(context, color);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

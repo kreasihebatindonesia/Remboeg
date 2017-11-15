@@ -136,14 +136,14 @@ public class HomeFragmentJob extends Fragment implements ILocation {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject resultObject = jsonArray.getJSONObject(i);
                             JobModel mJobModel = new JobModel();
-                            mJobModel.setId(Utils.optInt(resultObject, "id"));
-                            mJobModel.setTitle(Utils.optString(resultObject, "title"));
-                            mJobModel.setImage(Utils.optString(resultObject, "image"));
-                            mJobModel.setEndDate(Utils.optString(resultObject, "end_date"));
-                            mJobModel.setSalary(Utils.optString(resultObject, "salary"));
-                            mJobModel.setTotalLike(Utils.optInt(resultObject, "likes"));
-                            mJobModel.setTotalShare(Utils.optInt(resultObject, "shares"));
-                            mJobModel.setTotalView(Utils.optInt(resultObject, "views"));
+                            mJobModel.setIdJob(Utils.optInt(resultObject, "id"));
+                            mJobModel.setTitleJob(Utils.optString(resultObject, "title"));
+                            mJobModel.setImageJob(Utils.optString(resultObject, "image"));
+                            mJobModel.setEndDateJob(Utils.optString(resultObject, "end_date"));
+                            mJobModel.setSalaryJob(Utils.optString(resultObject, "salary"));
+                            mJobModel.setTotalLikes(Utils.optInt(resultObject, "likes"));
+                            mJobModel.setTotalShares(Utils.optInt(resultObject, "shares"));
+                            mJobModel.setTotalViews(Utils.optInt(resultObject, "views"));
 
                             mJobModelList.add(mJobModel);
                         }

@@ -66,18 +66,18 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.MyViewHolder> {
     public void onBindViewHolder(final JobAdapter.MyViewHolder holder, int position) {
         final JobModel mJob = mJobModelList.get(position);
 
-        holder.mTitleJob.setText(mJob.getTitle());
-        Glide.with(mContext).load(Const.URL_UPLOADS + mJob.getImage()).into(holder.mImageJob);
-        holder.mEndDate.setText(mJob.getEndDate());
-        holder.mSalary.setText(mJob.getSalary());
-        holder.txtView.setText(FormatNumber.getFormatNumber(mJob.getTotalView()) + "");
-        holder.txtLike.setText(FormatNumber.getFormatNumber(mJob.getTotalLike()) + "");
+        holder.mTitleJob.setText(mJob.getTitleJob());
+        Glide.with(mContext).load(Const.URL_UPLOADS + mJob.getImageJob()).into(holder.mImageJob);
+        holder.mEndDate.setText(mJob.getEndDateJob());
+        holder.mSalary.setText(mJob.getSalaryJob());
+        holder.txtView.setText(FormatNumber.getFormatNumber(mJob.getTotalViews()) + "");
+        holder.txtLike.setText(FormatNumber.getFormatNumber(mJob.getTotalLikes()) + "");
 
         holder.mImageJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(mContext, DetailJobActivity.class);
-                i.putExtra("id_job", mJob.getId());
+                i.putExtra("id_job", mJob.getIdJob());
                 mContext.startActivity(i);
             }
         });

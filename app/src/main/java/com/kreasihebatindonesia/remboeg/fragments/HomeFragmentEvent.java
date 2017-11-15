@@ -17,6 +17,7 @@ import com.kreasihebatindonesia.remboeg.adapters.EventAdapter;
 import com.kreasihebatindonesia.remboeg.globals.Const;
 import com.kreasihebatindonesia.remboeg.interfaces.ILocation;
 import com.kreasihebatindonesia.remboeg.models.EventModel;
+import com.kreasihebatindonesia.remboeg.utils.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -138,12 +139,12 @@ public class HomeFragmentEvent extends Fragment implements ILocation {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject resultObject = jsonArray.getJSONObject(i);
                             EventModel mEventModel = new EventModel();
-                            mEventModel.setIdEvent(resultObject.getInt("id"));
-                            mEventModel.setTitleEvent(resultObject.getString("title"));
-                            mEventModel.setImageEvent(resultObject.getString("image"));
-                            mEventModel.setTicketEvent(resultObject.getString("ticket"));
-                            mEventModel.setTotalViews(resultObject.getInt("views"));
-                            mEventModel.setTotalLikes(resultObject.getInt("likes"));
+                            mEventModel.setIdEvent(Utils.optInt(resultObject, "id"));
+                            mEventModel.setTitleEvent(Utils.optString(resultObject, "title"));
+                            mEventModel.setImageEvent(Utils.optString(resultObject,"image"));
+                            mEventModel.setTicketEvent(Utils.optString(resultObject,"ticket") == null ? "GRATIS": "BERBAYAR");
+                            mEventModel.setTotalViews(Utils.optInt(resultObject, "views"));
+                            mEventModel.setTotalLikes(Utils.optInt(resultObject, "likes"));
                             mEventModelList.add(mEventModel);
                         }
 
