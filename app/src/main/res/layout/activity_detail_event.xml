@@ -61,33 +61,33 @@
             android:orientation="vertical">
 
         <include
-            layout="@layout/include_detail_desc_event"
+            layout="@layout/include_detail_event_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/include_detail_map_event"
+            layout="@layout/include_detail_event_map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/include_detail_schedule_event"
+            layout="@layout/include_detail_event_schedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/include_detail_info_event"
+            layout="@layout/include_detail_event_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
 
         <include
-            layout="@layout/include_detail_ticket_event"
+            layout="@layout/include_detail_event_ticket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/include_detail_call_event"
+            layout="@layout/include_detail_event_action"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
