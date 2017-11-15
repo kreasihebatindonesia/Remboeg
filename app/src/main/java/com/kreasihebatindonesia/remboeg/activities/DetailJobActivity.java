@@ -52,6 +52,10 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
 
     @BindView(R.id.mImageJob)
     ImageView mImageJob;
+    @BindView(R.id.txtTitleJob)
+    TextView txtTitleJob;
+    @BindView(R.id.txtCompanyName)
+    TextView txtCompanyName;
     @BindView(R.id.txtCompany)
     TextView txtCompany;
     @BindView(R.id.txtVenue)
@@ -176,6 +180,8 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
                             public void run() {
                                 Glide.with(getApplicationContext()).load(Const.URL_UPLOADS + mJob.getImageJob()).into(mImageJob);
 
+                                txtTitleJob.setText(mJob.getTitleJob());
+                                txtCompanyName.setText(mJob.getCompanyJob());
                                 txtCompany.setVisibility(mJob.getDescJob() == null ? View.GONE : View.VISIBLE);
                                 txtCompany.setText(mJob.getDescJob());
 

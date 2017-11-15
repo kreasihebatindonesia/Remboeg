@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -61,6 +62,10 @@
             android:background="@color/colorPrimary"
             android:orientation="vertical">
 
+            <include
+                layout="@layout/include_detail_job_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <include
                 layout="@layout/include_detail_job_company"
@@ -76,8 +81,6 @@
 
 
     </android.support.v4.widget.NestedScrollView>
-
-
 
 
 </android.support.design.widget.CoordinatorLayout>
