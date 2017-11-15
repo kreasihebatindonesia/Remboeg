@@ -93,10 +93,10 @@ public class JobModel {
         return titleJob;
     }
 
-    public void setDescEvent(String desc){
+    public void setDescJob(String desc){
         descJob = desc;
     }
-    public Spanned getDescEvent(){
+    public Spanned getDescJob(){
 
         if(descJob == null)
             return null;

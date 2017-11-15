@@ -62,8 +62,15 @@
             android:orientation="vertical">
 
 
+            <include
+                layout="@layout/include_detail_job_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-
+            <include
+                layout="@layout/include_detail_job_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

@@ -5,11 +5,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.kreasihebatindonesia.remboeg.R;
 import com.kreasihebatindonesia.remboeg.app.BaseApplication;
 import com.kreasihebatindonesia.remboeg.globals.Const;
@@ -41,6 +49,19 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
 
     @BindView(R.id.mToolbar)
     Toolbar mToolbar;
+
+    @BindView(R.id.mImageJob)
+    ImageView mImageJob;
+    @BindView(R.id.txtCompany)
+    TextView txtCompany;
+    @BindView(R.id.txtVenue)
+    TextView txtVenue;
+    @BindView(R.id.txtAddress)
+    TextView txtAddress;
+
+    @BindView(R.id.mMapLocation)
+    LinearLayout mMapLocation;
+
 
     SupportMapFragment mMapView;
     GoogleMap map;
@@ -75,7 +96,11 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
+        map = googleMap;
+        map.getUiSettings().setScrollGesturesEnabled(false);
+        map.getUiSettings().setZoomControlsEnabled(false);
+        map.getUiSettings().setMapToolbarEnabled(false);
+        map.getUiSettings().setAllGesturesEnabled(false);
     }
 
     @Override
@@ -99,7 +124,7 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
                 .build();
 
         Request request = new Request.Builder()
-                .url(Const.METHOD_EVENT_DETAIL_ACTIVE)
+                .url(Const.METHOD_JOB_DETAIL_ACTIVE)
                 .post(requestBody)
                 .build();
 
@@ -121,7 +146,7 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
                         final JobModel mJob = new JobModel();
                         mJob.setIdJob(Utils.optInt(jsonResult, "id"));
                         mJob.setTitleJob(Utils.optString(jsonResult, "title"));
-                        mJob.setDescEvent(Utils.optString(jsonResult, "description"));
+                        mJob.setDescJob(Utils.optString(jsonResult, "description"));
                         mJob.setBenefitJob(Utils.optString(jsonResult, "benefit"));
                         mJob.setImageJob(Utils.optString(jsonResult, "image"));
                         mJob.setLocationJob(Utils.optDouble(jsonResult, "lat_loc"), Utils.optDouble(jsonResult, "lng_loc"));
@@ -149,7 +174,16 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Glide.with(getApplicationContext()).load(Const.URL_UPLOADS + mJob.getImageJob()).into(mImageJob);
 
+                                txtCompany.setVisibility(mJob.getDescJob() == null ? View.GONE : View.VISIBLE);
+                                txtCompany.setText(mJob.getDescJob());
+
+                                mMapLocation.setVisibility(mJob.getLocationLatJob() == 0? View.GONE: View.VISIBLE);
+                                getLocationMap(mJob.getLocationLatJob(), mJob.getLocationLngJob(), mJob.getCompanyJob(), mJob.getAddressJob(), mJob.getTitleJob());
+
+                                txtVenue.setText(mJob.getCompanyJob());
+                                txtAddress.setText(mJob.getAddressJob());
                             }
                         });
                     }
@@ -160,5 +194,28 @@ public class DetailJobActivity extends AppCompatActivity implements Connectivity
             }
 
         });
+    }
+
+    void getLocationMap(final double lat, final double lng, final String venue, final String address, final String title) {
+        LatLng latlong = new LatLng(lat, lng);
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(latlong).zoom(15).build();
+        map.addMarker(new MarkerOptions().position(latlong).title("Lokasi"));
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                Intent iMapDetail = new Intent(getBaseContext(), DetailMapActivity.class);
+                iMapDetail.putExtra("title", title);
+                iMapDetail.putExtra("venue", venue);
+                iMapDetail.putExtra("address", address);
+                iMapDetail.putExtra("lat", lat);
+                iMapDetail.putExtra("lng", lng);
+                startActivity(iMapDetail);
+
+            }
+        });
+
     }
 }

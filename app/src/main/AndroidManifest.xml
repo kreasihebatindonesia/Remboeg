@@ -43,6 +43,11 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
+            android:name=".activities.DetailJobActivity"
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity
             android:name=".activities.DetailMapActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize">
